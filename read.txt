@@ -1,0 +1,46 @@
+() APP de Cadastros Gerais
+() CRUD com habilitação de usuarios admin e geral
+() Tela login
+() Tela Home ou Dashboard
+() Cadastros
+    () Usuario 
+    () Cliente - PJ ou PF
+    () Transportadora
+    () Produtos      
+       
+       
+       
+       
+const editLink = async (req, res) => {
+
+    let link = {}
+    link.txtHoje = req.body.txtHoje
+    link.txtTamanho = req.body.txtTamanho
+    link.txtTipo = req.body.txtTipo
+    link.txtMaterial = req.body.txtMaterial
+    link.txtQtdRolos = req.body.txtQtdRolos
+    link.txtMetragem = req.body.txtMetragem
+    link.txtObs = req.body.txtObs
+    link.txtOP = req.body.txtOP
+    link.txtOperador = req.body.txtOperador
+    link.txtNumCaixa = req.body.txtNumCaixa
+
+    let id = req.params.id
+
+    if (!id) {
+        id = req.body.id
+    }
+    try {
+        let doc = await Link.updateOne({ _id: id }, link)
+        res.redirect('/lista')
+    } catch (error) {
+        res.render('/edit', { error, body: req.body })
+    }
+}
+
+       
+       
+       
+       
+       
+       

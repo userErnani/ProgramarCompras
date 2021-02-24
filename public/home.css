@@ -1,0 +1,16 @@
+body{
+    background-color: rgb(252, 172, 67);
+    margin: auto;
+    text-align: center;
+}
+.dashboard{
+    margin: center;
+    width: 15vw;
+    display: inline-block;
+}
+img{
+    width: 8vw;
+}
+a{
+    text-decoration: none;
+}

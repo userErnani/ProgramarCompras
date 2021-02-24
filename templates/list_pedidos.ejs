@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/list_users.css">
+    <title>Lista de Usuarios</title>
+
+</head>
+
+<body>
+    <div class="btn-01-02">
+        <div class="btn-01">
+            <a class="btn-01-return" href="/user/dashboard">Voltar</a>
+        </div>
+        <div class="btn-02">
+            <a class="btn-02-newuser" href="/user/insert_pedido">Novo<br>Pedido</a>
+        </div>
+    </div>
+    <div class="line-title">
+        <table>
+            <tr>
+                <td class="headline">Pedido</td>
+                <td class="headline">Data Pedido</td>
+                <td class="headline">Prev. Entrega</td>
+                <td class="headline">Fornecedor</td>
+                <td class="headline">Material</td>
+                <td class="headline">largura</td>
+                <td class="headline">quantidade</td>
+                <td class="headline">linear</td>
+                <td class="headline">total</td>
+                <td class="headline"></td>
+
+            </tr>
+        </table>
+    </div>
+
+    <div class="header">
+        <table id="tabela">
+            <thead>
+            <tbody>
+                <% for (let i=0; i < users.length; i++) {%>
+                    <div id='<%= users[i]._id%>'>
+                        <form class="" method="POST" action="/user/delete/<%= users[i]._id%>/?_method=DELETE">
+                            <tr>
+                                <td class="headline">
+                                    <%= users[i].pedido%>
+                                </td>
+                                <td class="headline">
+                                    <%= users[i].dtpedido%>
+                                </td>
+                                <td class="headline">
+                                    <%= users[i].preventrega%>
+                                </td>
+                                <td class="headline">
+                                    <%= users[i].fornecedor%>
+                                </td>
+                                <td class="headline">
+                                    <%= users[i].material%>
+                                </td>
+                                <td class="headline">
+                                    <%= users[i].largura%>
+                                </td>
+                                <td class="headline">
+                                    <%= users[i].quantidade%>
+                                </td>
+                                <td class="headline">
+                                    <%= users[i].linear%>
+                                </td>
+                                <td class="headline">
+                                    <%= users[i].largura%>
+                                </td>
+
+
+                                <input name="id" value="<%= users[i]._id%>" hidden>
+                                <td class="btnEdit"><a href="/user/edit/<%= users[i]._id%>">Editar</a>
+                                </td>
+                                <td class="btnExcluir"><button onclick=" return window.confirm('Confirme a exclusão')"
+                                        type="submit">Excluir</button></td>
+                            </tr>
+                        </form>
+                    </div>
+                    <%}%>
+            </tbody>
+            </tbody>
+            </thead>
+        </table>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDitar Cadastro</title>
+    <link rel="stylesheet" href="/public/insert_pedido.css">
+</head>
+
+<body>
+    <div class="btn-01-02">
+
+        <div class="btn-01">
+            <a class="btn-01-return" href="/user/list_pedidos">Voltar</a>
+        </div>
+
+        <div class="miolo">
+            <form action="/user/edit/<%=body.id%>" method="POST">
+                <div class="centro-miolo">
+                    <h1>Alterar os dados do Pedido</h1>
+
+                    <div class="email">
+                        <input type="number" placeholder="Numero do Pedido" name="pedido" value=<%=body.pedido%> required>
+                    </div>
+                    <div class="email">
+                        <input type="date" placeholder="" name="dtpedido" value=<%=body.dtpedido%> required>
+                    </div>
+                    <div class="email">
+                        <input type="date" minlength="6" placeholder="Previsão Entrega" name="preventrega"
+                            value=<%=body.preventrega%> required>
+                    </div>
+                    <div class="email">
+                        <input type="text" minlength="6" placeholder="Fornecedor" name="fornecedor"
+                            value=<%=body.fornecedor%> required>
+                    </div>
+                    <div class="email">
+                        <input type="text" minlength="6" placeholder="Material" name="material"
+                            value=<%=body.material%> required>
+                    </div>
+                    <div class="email">
+                        <input type="number" minlength="6" placeholder="largura" name="largura" value=<%=body.largura%> required>
+                    </div>
+                    <div class="email">
+                        <input id="quantidade" type="number" minlength="6" placeholder="quantidade" name="quantidade"
+                            value=<%=body.quantidade%> required>
+                    </div>
+                    <div class="email">
+                        <input id="linear" type="number" minlength="6" placeholder="Mts Linear" name="linear"
+                            value=<%=body.linear%> required>
+                    </div>
+                    <div class="email">
+                        <input id="total" type="number" minlength="6" placeholder="Qtd. Total" name="total" value=<%=body.total%> readonly>
+                    </div>
+                    <div class="botao" onclick="total()">
+                        <button> Salvar
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <% if(error){%>
+            <h3>
+                <%=error.message%>
+            </h3>
+            <%}%>
+    </div>
+
+    <script>
+        function total() {
+            let quantidade = document.getElementById('quantidade').value
+            let linear = document.getElementById('linear').value
+            let total = (parseFloat(quantidade) * parseInt(linear)).toFixed(2)
+            document.getElementById('total').innerHTML = total;
+            alert(total);
+        }
+    </script>
+</body>
+
+</html>

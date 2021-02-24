@@ -1,0 +1,56 @@
+body{
+    background-color: bisque;
+    text-align: center;
+}
+.miolo{
+    background-color: rgb(224, 193, 193);
+    margin: auto;
+    width: 40vw;
+    height: 50vh;
+    border: solid 1.5px rgb(0, 2, 26);
+    border-radius: 5px;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+.centro-miolo{
+    margin: auto;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+h1{
+    color: rgb(41, 41, 240);
+    font-size: 3vw;
+}
+.email, .password, .botao{
+    margin-top: 20px;
+}
+input{
+    width: 20vw;
+    height: 30px;
+    font-size: 1vw;
+    border-radius: 5px;
+}
+input:hover {
+    background-color: yellow;
+  }
+button{
+    width: 15vw;
+    font-size: 2vw;
+    color: white;
+    background-color: rgb(36, 35, 35);
+    border-radius: 6px;
+    box-shadow: 5px -3px 3px rgb(230, 105, 105);
+}
+button:hover{
+    background-color: white;
+    color: black;
+}
