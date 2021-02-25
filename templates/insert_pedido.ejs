@@ -9,10 +9,8 @@
 </head>
 
 <body>
-    <div class="btn-01-02">
-        <div class="btn-01">
-            <a class="btn-01-return" href="/user/list_pedidos">Voltar</a>
-        </div>
+    <div class="btn-back">
+        <a class="btn-back-01" href="/user/list_pedidos">Voltar</a>
     </div>
     <div class="miolo">
         <form action="/user/insert_pedido" method="POST">
@@ -21,7 +19,7 @@
                 <div class="email">
                     <input type="number" placeholder="Numero do Pedido" name="pedido" required>
                 </div>
-                <div id="dtpedido"  class="email">
+                <div id="dtpedido" class="email">
                     <input type="date" placeholder="" name="dtpedido" required>
                 </div>
                 <div class="email">
@@ -45,12 +43,10 @@
                 <div class="email">
                     <input id="total" type="number" placeholder="Qtd. Total" name="total" readonly>
                 </div>
-            </form>
-
                 <div class="botao" onclick="total()">
                     <button> Salvar
                 </div>
-            </div>
+        </form>
     </div>
 
     <script>

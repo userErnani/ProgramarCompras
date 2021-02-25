@@ -82,6 +82,12 @@ a:link {
 #tabela tr:hover:nth-child(even){
     background-color:rgb(244, 247, 104);
 }
+.adicionar_op{
+    background-color: black;
+    font-size: 2vw;
+    color: white;
+    }
+    
 .btnEdit, .btnExcluir{
     top: 25px;
     right: 25px;

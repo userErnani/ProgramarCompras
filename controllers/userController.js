@@ -1,6 +1,8 @@
-const User = require('../models/MatPrima') // chamando o banco de dados para cadastrar usuarios
+// nome que vai ser usado para falar com o BD
+const Papeis = require('../models/MatPrima') // chamando o banco de dados para cadastrar usuarios
+const Ops = require('../models/Prog_Ops') // chamando o banco de dados para cadastrar usuarios
 
-// conversão da data para o padrão brasileiro
+
 const str_data = require('../arquivos_acesso/conversor_data')
 
 
@@ -8,7 +10,7 @@ const userController = {
 
     insertUser: async function (req, res) {
 
-        const user = new User({
+        const progped = new Papeis({
             pedido: req.body.pedido,
             dtpedido: req.body.dtpedido,
             preventrega: req.body.preventrega,
@@ -17,21 +19,39 @@ const userController = {
             largura: req.body.largura,
             quantidade: req.body.quantidade,
             linear: req.body.linear,
-            total: req.body.total
+            total: req.body.total,
         })
         try {
-            const saveUsed = await user.save()
+            const saveUsed = await progped.save()
             // res.send('Cadastrado com sucesso !!!!!')
             res.redirect('/user/list_pedidos')
         } catch (error) {
             res.status(400).send(error)
         }
     },
+
+    insertOP: async function (req, res) {
+
+        const adicop = new Ops({
+            num_op: req.body.num_op,
+            dt_ped_op: req.body.dt_ped_op,
+            prev_faturamento: req.body.prev_faturamento,
+            qtd_linear: req.body.qtd_linear
+        })
+        try {
+            const saveOp = await adicop.save()
+            res.send('Cadastrado com sucesso !!!!!')
+            //res.redirect('/user/list_pedidos')
+        } catch (error) {
+            res.status(400).send(error)
+        }
+    },
+
     loadUser: async function (req, res) {
 
         let id = req.params.id
         try {
-            let doc = await User.findById(id)
+            let doc = await Papeis.findById(id)
             res.render('../templates/edit_pedido', { error: false, body: doc })
         }
         catch (error) {
@@ -40,26 +60,26 @@ const userController = {
     },
 
     editUser: async function (req, res) {
+        //nome para alterar o array
+        let progped = {}
 
-        let user = {}
-        
-        user.pedido = req.body.pedido,
-        user.dtpedido = req.body.dtpedido,
-        user.preventrega = req.body.preventrega,
-        user.fornecedor = req.body.fornecedor,
-        user.material = req.body.material,
-        user.largura = req.body.largura,
-        user.quantidade = req.body.quantidade,
-        user.linear = req.body.linear,
-        user.total = req.body.total
- 
+        progped.pedido = req.body.pedido,
+            progped.dtpedido = req.body.dtpedido,
+            progped.preventrega = req.body.preventrega,
+            progped.fornecedor = req.body.fornecedor,
+            progped.material = req.body.material,
+            progped.largura = req.body.largura,
+            progped.quantidade = req.body.quantidade,
+            progped.linear = req.body.linear,
+            progped.total = req.body.total
+
         let id = req.params.id
 
         if (!id) {
             id = req.body.id
         }
         try {
-            let doc = await User.updateOne({ _id: id }, user)
+            let doc = await Papeis.updateOne({ _id: id }, progped)
             res.redirect('/user/list_pedidos')
         } catch (error) {
             res.status(400).send(error)
@@ -73,7 +93,7 @@ const userController = {
             id = req.body.id
         }
         try {
-            let doc = await User.findByIdAndDelete(id)
+            let doc = await Papeis.findByIdAndDelete(id)
             res.redirect('/user/list_pedidos')
         }
         catch (error) {
@@ -83,9 +103,9 @@ const userController = {
     listUsers: async function (req, res) {
 
         try {
-            let docs = await User.find({}).sort({ name: 1 })
+            let docs = await Papeis.find({}).sort({ name: 1 })
 
-            res.render('../templates/list_pedidos', { users: docs, error: false, body: {} })
+            res.render('../templates/list_pedidos', { progpeds: docs, error: false, body: {} })
         } catch (error) {
             res.status(404).send(error)
         }

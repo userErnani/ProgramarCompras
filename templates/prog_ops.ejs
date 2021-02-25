@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/insert_pedido.css">
+    <title>Programar OPs</title>
+</head>
+<body>
+    <div class="miolo_OP">
+        <div class="btn-back">
+            <a class="btn-back-01" href="/user/list_pedidos">Voltar</a>
+        </div> 
+
+        <form action="/user/prog" method="POST">
+            <div class="centro-miolo">
+                <h1>PROGRAMAR OPs</h1>
+                <div class="email">Numero da OP <br>
+                    <input type="number" name="num_op" required>
+                </div>
+                <div id="dtpedido" class="email">Data do Pedido <br>
+                    <input type="date" name="dt_ped_op" required>
+                </div>
+                <div class="email">Previsão de Faturamento <br>
+                    <input type="date" name="prev_faturamento" required>
+                </div>
+                <div class="email">Quantidade Linear Total <br>
+                    <input id="quantidade" type="number" name="qtd_linear" required>
+                </div>
+                <div class="botao">
+                    <button> Salvar
+                </div>
+        </form>
+    </div>
+
+</body>
+</html>

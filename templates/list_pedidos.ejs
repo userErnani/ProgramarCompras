@@ -31,6 +31,7 @@
                 <td class="headline">quantidade</td>
                 <td class="headline">linear</td>
                 <td class="headline">total</td>
+                <td class="headline">+</td>
                 <td class="headline"></td>
 
             </tr>
@@ -41,43 +42,42 @@
         <table id="tabela">
             <thead>
             <tbody>
-                <% for (let i=0; i < users.length; i++) {%>
-                    <div id='<%= users[i]._id%>'>
-                        <form class="" method="POST" action="/user/delete/<%= users[i]._id%>/?_method=DELETE">
+                <% for (let i=0; i < progpeds.length; i++) {%>
+                    <div id='<%= progpeds[i]._id%>'>
+                        <form class="" method="POST" action="/user/delete/<%= progpeds[i]._id%>/?_method=DELETE">
                             <tr>
                                 <td class="headline">
-                                    <%= users[i].pedido%>
+                                    <%= progpeds[i].pedido%>
                                 </td>
                                 <td class="headline">
-                                    <%= users[i].dtpedido%>
+                                    <%= progpeds[i].dtpedido%>
                                 </td>
                                 <td class="headline">
-                                    <%= users[i].preventrega%>
+                                    <%= progpeds[i].preventrega%>
                                 </td>
                                 <td class="headline">
-                                    <%= users[i].fornecedor%>
+                                    <%= progpeds[i].fornecedor%>
                                 </td>
                                 <td class="headline">
-                                    <%= users[i].material%>
+                                    <%= progpeds[i].material%>
                                 </td>
                                 <td class="headline">
-                                    <%= users[i].largura%>
+                                    <%= progpeds[i].largura%>
                                 </td>
                                 <td class="headline">
-                                    <%= users[i].quantidade%>
+                                    <%= progpeds[i].quantidade%>
                                 </td>
                                 <td class="headline">
-                                    <%= users[i].linear%>
+                                    <%= progpeds[i].linear%>
                                 </td>
                                 <td class="headline">
-                                    <%= users[i].largura%>
+                                    <%= progpeds[i].total%>
                                 </td>
-                                <td class="headline">
-                                    <%= users[i].total%>
+                                <td>
+                                    <td class="adicionar_op"><a class="adicionar_op" href="/user/prog">+</a>
                                 </td>
-
-                                <input name="id" value="<%= users[i]._id%>" hidden>
-                                <td class="btnEdit"><a href="/user/edit/<%= users[i]._id%>">Editar</a>
+                                <input name="id" value="<%= progpeds[i]._id%>" hidden>
+                                <td class="btnEdit"><a href="/user/edit/<%= progpeds[i]._id%>">Editar</a>
                                 </td>
                                 <td class="btnExcluir"><button onclick=" return window.confirm('Confirme a exclusão')"
                                         type="submit">Excluir</button></td>
