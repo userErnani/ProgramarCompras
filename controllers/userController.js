@@ -8,9 +8,6 @@ const userController = {
 
     insertUser: async function (req, res) {
 
-        function total(){
-           console.log('deu certo');
-        }
         const user = new User({
             pedido: req.body.pedido,
             dtpedido: req.body.dtpedido,
@@ -25,7 +22,7 @@ const userController = {
         try {
             const saveUsed = await user.save()
             // res.send('Cadastrado com sucesso !!!!!')
-            res.render('../templates/dashboard')
+            res.redirect('/user/list_pedidos')
         } catch (error) {
             res.status(400).send(error)
         }

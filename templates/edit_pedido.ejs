@@ -27,35 +27,31 @@
                         <input type="date" placeholder="" name="dtpedido" value=<%=body.dtpedido%> required>
                     </div>
                     <div class="email">
-                        <input type="date" minlength="6" placeholder="Previsão Entrega" name="preventrega"
-                            value=<%=body.preventrega%> required>
+                        <input type="date" placeholder="Previsão Entrega" name="preventrega" value=<%=body.preventrega%> required>
                     </div>
                     <div class="email">
-                        <input type="text" minlength="6" placeholder="Fornecedor" name="fornecedor"
-                            value=<%=body.fornecedor%> required>
+                        <input type="text" placeholder="Fornecedor" name="fornecedor" value=<%=body.fornecedor%> required>
                     </div>
                     <div class="email">
-                        <input type="text" minlength="6" placeholder="Material" name="material"
-                            value=<%=body.material%> required>
+                        <input type="text" placeholder="Material" name="material" value=<%=body.material%> required>
                     </div>
                     <div class="email">
-                        <input type="number" minlength="6" placeholder="largura" name="largura" value=<%=body.largura%> required>
+                        <input type="number" placeholder="largura" name="largura" value=<%=body.largura%> required>
                     </div>
                     <div class="email">
-                        <input id="quantidade" type="number" minlength="6" placeholder="quantidade" name="quantidade"
-                            value=<%=body.quantidade%> required>
+                        <input id="quantidade" type="number" placeholder="quantidade" name="quantidade" value=<%=body.quantidade%> required>
                     </div>
                     <div class="email">
-                        <input id="linear" type="number" minlength="6" placeholder="Mts Linear" name="linear"
-                            value=<%=body.linear%> required>
+                        <input id="linear" type="number" placeholder="Mts Linear" name="linear" value=<%=body.linear%> required>
                     </div>
                     <div class="email">
-                        <input id="total" type="number" minlength="6" placeholder="Qtd. Total" name="total" value=<%=body.total%> readonly>
+                        <input id="total" type="number" placeholder="Qtd. Total" name="total" value=<%=body.total%> readonly>
                     </div>
                     <div class="botao" onclick="total()">
                         <button> Salvar
                     </div>
                 </div>
+                <h1>Ola</h1>
             </form>
         </div>
 
@@ -70,9 +66,8 @@
         function total() {
             let quantidade = document.getElementById('quantidade').value
             let linear = document.getElementById('linear').value
-            let total = (parseFloat(quantidade) * parseInt(linear)).toFixed(2)
-            document.getElementById('total').innerHTML = total;
-            alert(total);
+            let res = (parseFloat(quantidade) * parseInt(linear)).toFixed(2)
+            document.getElementById("total").value = res
         }
     </script>
 </body>

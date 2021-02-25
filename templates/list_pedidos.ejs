@@ -13,7 +13,7 @@
 <body>
     <div class="btn-01-02">
         <div class="btn-01">
-            <a class="btn-01-return" href="/user/dashboard">Voltar</a>
+            <a class="btn-01-return" href="/user/dashboard">HOME</a>
         </div>
         <div class="btn-02">
             <a class="btn-02-newuser" href="/user/insert_pedido">Novo<br>Pedido</a>
@@ -72,7 +72,9 @@
                                 <td class="headline">
                                     <%= users[i].largura%>
                                 </td>
-
+                                <td class="headline">
+                                    <%= users[i].total%>
+                                </td>
 
                                 <input name="id" value="<%= users[i]._id%>" hidden>
                                 <td class="btnEdit"><a href="/user/edit/<%= users[i]._id%>">Editar</a>
