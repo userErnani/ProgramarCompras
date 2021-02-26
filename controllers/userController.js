@@ -34,14 +34,17 @@ const userController = {
 
         const adicop = new Ops({
             num_op: req.body.num_op,
+            cliente: req.body.cliente,
             dt_ped_op: req.body.dt_ped_op,
             prev_faturamento: req.body.prev_faturamento,
-            qtd_linear: req.body.qtd_linear
+            qtd_linear: req.body.qtd_linear,
+            obs_op: req.body.obs_op,
+            resultado: req.body.resultado
         })
         try {
             const saveOp = await adicop.save()
-            res.send('Cadastrado com sucesso !!!!!')
-            //res.redirect('/user/list_pedidos')
+            //res.send('Cadastrado com sucesso !!!!!')
+            res.redirect('/user/list_pedidos')
         } catch (error) {
             res.status(400).send(error)
         }

@@ -74,7 +74,7 @@
                                     <%= progpeds[i].total%>
                                 </td>
                                 <td>
-                                    <td class="adicionar_op"><a class="adicionar_op" href="/user/prog">+</a>
+                                <td class="adicionar_op"><a class="adicionar_op" href="/user/prog">+</a>
                                 </td>
                                 <input name="id" value="<%= progpeds[i]._id%>" hidden>
                                 <td class="btnEdit"><a href="/user/edit/<%= progpeds[i]._id%>">Editar</a>
@@ -83,13 +83,39 @@
                                         type="submit">Excluir</button></td>
                             </tr>
                         </form>
+
+                        <div class="line-op">
+
+                            <td class="headline">
+                                <!-- <%= progpeds[i].total%> -->Numero OP
+                            </td>
+                            <td class="headline">
+                                <!-- <%= progpeds[i].total%> -->Cliente
+                            </td>
+                            <td class="headline">
+                                <!-- <%= progpeds[i].total%> -->Data Pedido
+                            </td>
+                            <td class="headline">
+                                <!-- <%= progpeds[i].total%> -->Prev Faturamento
+                            </td>
+                            <td class="headline">
+                                <!-- <%= progpeds[i].total%> -->Qts. Linear
+                            </td>
+                            <td class="headline">
+                                <!-- <%= progpeds[i].total%> -->Obs. OP
+                            </td>
+                            <td class="headline">
+                                <!-- <%= progpeds[i].total%> -->Resultado
+                            </td>
+                        </div>
+
                     </div>
                     <%}%>
-            </tbody>
             </tbody>
             </thead>
         </table>
     </div>
+
 </body>
 
 </html>

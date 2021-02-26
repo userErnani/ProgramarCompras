@@ -1,7 +1,6 @@
 const express = require('express');
+const userController = require('../controllers/userController');
       router = express()
-      userController = require('../controllers/userController');
-
 
 router.get('/home', (req, res) => {res.render('../templates/home')})
 router.get('/dashboard', (req, res) => {res.render('../templates/dashboard')})
@@ -18,7 +17,9 @@ router.post('/edit/:id', userController.editUser)
 router.delete('/delete/:id', userController.deleteUser)
 
 router.get('/prog', (req, res) => {res.render('../templates/prog_ops')})
-router.post('/prog', (req, res) => {res.render('../templates/dashboard')})
+router.post('/prog', userController.insertOP)
+
+//(req, res) => {res.render('../templates/dashboard')})
 
 
   
