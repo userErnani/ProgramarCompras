@@ -44,7 +44,7 @@ const userController = {
         try {
             const saveOp = await adicop.save()
             //res.send('Cadastrado com sucesso !!!!!')
-            res.redirect('/user/list_pedidos')
+            res.redirect('/user/list_ops')
         } catch (error) {
             res.status(400).send(error)
         }
@@ -66,7 +66,7 @@ const userController = {
         //nome para alterar o array
         let progped = {}
 
-        progped.pedido = req.body.pedido,
+            progped.pedido = req.body.pedido,
             progped.dtpedido = req.body.dtpedido,
             progped.preventrega = req.body.preventrega,
             progped.fornecedor = req.body.fornecedor,
@@ -103,6 +103,23 @@ const userController = {
             res.status(404).send(error)
         }
     },
+    deleteOP: async function (req, res) {
+
+        let id = req.params.id
+
+        if (!id) { 
+            id = req.body.id
+        }
+        try {
+            let doc = await Ops.findByIdAndDelete(id)
+            //res.send('deletado')
+            res.redirect('/user/list_ops')
+        }
+        catch (error) {
+            res.status(404).send(error)
+        }
+    },
+
     listUsers: async function (req, res) {
 
         try {
@@ -112,7 +129,20 @@ const userController = {
         } catch (error) {
             res.status(404).send(error)
         }
-    }
+    }, 
+
+    listOps: async function (req, res) {
+
+        try {
+            let docs = await Ops.find({}).sort({ name: 1 })
+
+            res.render('../templates/list_ops', { adicops: docs, error: false, body: {} })
+            //res.send('Passei aqui')
+        } catch (error) {
+            res.status(404).send(error)
+        }
+    }  
+
 }
 
 module.exports = userController

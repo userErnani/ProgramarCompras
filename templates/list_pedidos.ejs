@@ -31,9 +31,7 @@
                 <td class="headline">quantidade</td>
                 <td class="headline">linear</td>
                 <td class="headline">total</td>
-                <td class="headline">+</td>
                 <td class="headline"></td>
-
             </tr>
         </table>
     </div>
@@ -73,9 +71,6 @@
                                 <td class="headline">
                                     <%= progpeds[i].total%>
                                 </td>
-                                <td>
-                                <td class="adicionar_op"><a class="adicionar_op" href="/user/prog">+</a>
-                                </td>
                                 <input name="id" value="<%= progpeds[i]._id%>" hidden>
                                 <td class="btnEdit"><a href="/user/edit/<%= progpeds[i]._id%>">Editar</a>
                                 </td>
@@ -83,38 +78,25 @@
                                         type="submit">Excluir</button></td>
                             </tr>
                         </form>
-
-                        <div class="line-op">
-
-                            <td class="headline">
-                                <!-- <%= progpeds[i].total%> -->Numero OP
-                            </td>
-                            <td class="headline">
-                                <!-- <%= progpeds[i].total%> -->Cliente
-                            </td>
-                            <td class="headline">
-                                <!-- <%= progpeds[i].total%> -->Data Pedido
-                            </td>
-                            <td class="headline">
-                                <!-- <%= progpeds[i].total%> -->Prev Faturamento
-                            </td>
-                            <td class="headline">
-                                <!-- <%= progpeds[i].total%> -->Qts. Linear
-                            </td>
-                            <td class="headline">
-                                <!-- <%= progpeds[i].total%> -->Obs. OP
-                            </td>
-                            <td class="headline">
-                                <!-- <%= progpeds[i].total%> -->Resultado
-                            </td>
-                        </div>
-
                     </div>
-                    <%}%>
+            <tbody>
+                <div class="line-op">
+                    <tr class="">
+                        <td class="headline-op">Numero OP </td>
+                        <td class="headline-op">Cliente </td>
+                        <td class="headline-op">Pedido </td>
+                        <td class="headline-op">Prev. Faturamento </td>
+                        <td class="headline-op">Linear </td>
+                        <td class="headline-op">Obs. OP </td>
+                        <td class="headline-op">Resultado </td>
+                    </tr>
+                </div>
             </tbody>
-            </thead>
-        </table>
     </div>
+    <%}%>
+        </tbody>
+        </thead>
+    </table>
 
 </body>
 

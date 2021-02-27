@@ -10,10 +10,10 @@
 <body>
     <div class="miolo_OP">
         <div class="btn-back">
-            <a class="btn-back-01" href="/user/list_pedidos">Voltar</a>
+            <a class="btn-back-01" href="/user/list_ops">Voltar</a>
         </div> 
 
-        <form action="/user/prog" method="POST">
+        <form action="/user/insert_op" method="POST">
             <div class="centro-miolo">
                 <h1>PROGRAMAR OPs</h1>
                 <div class="email">Numero da OP <br>
@@ -32,7 +32,7 @@
                     <input type="number" name="qtd_linear" required>
                 </div>
                 <div class="email">Detalhe da OP<br>
-                    <input type="text" name="obs_op" required>
+                    <input type="text" name="obs_op">
                 </div>
                 <div class="botao">
                     <button> Salvar

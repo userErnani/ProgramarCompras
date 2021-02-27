@@ -11,34 +11,11 @@
        
        
        
-const editLink = async (req, res) => {
+                         <% for (let i=0; i < adicops.length; i++) {%>
+                        <div id='<%= adicops[i]._id%>'>
+                            <form class="" method="POST" action="/user/deleteOP/<%= adicops[i]._id%>/?_method=DELETE">
 
-    let link = {}
-    link.txtHoje = req.body.txtHoje
-    link.txtTamanho = req.body.txtTamanho
-    link.txtTipo = req.body.txtTipo
-    link.txtMaterial = req.body.txtMaterial
-    link.txtQtdRolos = req.body.txtQtdRolos
-    link.txtMetragem = req.body.txtMetragem
-    link.txtObs = req.body.txtObs
-    link.txtOP = req.body.txtOP
-    link.txtOperador = req.body.txtOperador
-    link.txtNumCaixa = req.body.txtNumCaixa
-
-    let id = req.params.id
-
-    if (!id) {
-        id = req.body.id
-    }
-    try {
-        let doc = await Link.updateOne({ _id: id }, link)
-        res.redirect('/lista')
-    } catch (error) {
-        res.render('/edit', { error, body: req.body })
-    }
-}
-
-       
+  
        
        
        

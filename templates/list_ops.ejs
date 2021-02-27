@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/list_users.css">
+    <title>Lista de Usuarios</title>
+
+</head>
+
+<body>
+    <div class="btn-01-02">
+        <div class="btn-01">
+            <a class="btn-01-return" href="/user/dashboard">HOME</a>
+        </div>
+        <div class="btn-02">
+            <a class="btn-02-newuser" href="/user/insert_pedido">Novo<br>Pedido</a>
+        </div>
+    </div>
+    <div class="line-title-op">
+        <table>
+            <tr>
+                <td class="headline">Num. da OP</td>
+                <td class="headline">Data Pedido</td>
+                <td class="headline">Cliente</td>
+                <td class="headline">Qtd. Linear</td>
+                <td class="headline">Observação</td>
+                <td class="headline">Prev. Faturamento</td>
+                <td class="headline">Disponivel</td>
+                <td class="adic_op"><a class="adicionar_op" href="/user/insert_op">+</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="header">
+        <table id="tabela">
+            <tbody>
+                <% for (let i=0; i < adicops.length; i++) {%>
+                    <div id='<%= adicops[i]._id%>'>
+                        <form class="" method="POST" action="/user/deleteOP/<%= adicops[i]._id%>/?_method=DELETE">
+                            <tr>
+                                <div class="line-op">
+                                    <td class="headline">
+                                        <%= adicops[i].num_op%>
+                                    </td>
+                                    <td class="headline">
+                                        <%= adicops[i].dt_ped_op%>
+                                    </td>
+                                    <td class="headline">
+                                        <%= adicops[i].cliente%>
+                                    </td>
+                                    <td class="headline">
+                                        <%= adicops[i].qtd_linear%>
+                                    </td>
+                                    <td class="headline">
+                                        <%= adicops[i].obs_op%>
+                                    </td>
+                                    <td class="headline">
+                                        <%= adicops[i].prev_faturamento%>
+                                    </td>
+
+                                    <td class="headline">
+                                        <%= adicops[i].resultado%>
+                                    </td>
+                                    <input name="id" value="<%= adicops[i]._id%>" hidden>
+                                    <td class="btnExcluir"><button
+                                            onclick=" return window.confirm('Confirme a exclusão')"
+                                            type="submit">Excluir</button></td>
+                                </div>
+                            </tr>
+                        </form>
+                    </div>
+            </tbody>
+            <%}%>
+        </table>
+    </div>
+
+</body>
+
+</html>
