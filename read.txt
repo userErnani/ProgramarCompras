@@ -10,11 +10,21 @@
        
        
        
-       
-                         <% for (let i=0; i < adicops.length; i++) {%>
-                        <div id='<%= adicops[i]._id%>'>
-                            <form class="" method="POST" action="/user/deleteOP/<%= adicops[i]._id%>/?_method=DELETE">
+module.exports = function(){
 
+    var Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
+
+    var pratoShema = mongoose.Schema({
+        nome: {type: String, trim: true},
+        valor: {type: Number, trim: true},
+        data_cad: {type: Date, default: Date.now},
+        restaurante: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Restaurante'
+    }});
+
+    return mongoose.model('Pratos', pratoShema);
   
        
        

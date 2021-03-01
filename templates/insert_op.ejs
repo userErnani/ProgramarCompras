@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,38 +8,45 @@
     <link rel="stylesheet" href="/public/insert_pedido.css">
     <title>Programar OPs</title>
 </head>
+
 <body>
     <div class="miolo_OP">
         <div class="btn-back">
-            <a class="btn-back-01" href="/user/list_ops">Voltar</a>
-        </div> 
+            <a class="btn-back-01" href="/user/list_pedidos">Voltar</a>
+        </div>
+        <header>
+            <form action="/user/insert_op" method="POST">
+                <div class="centro-miolo">
+                    <h1>PROGRAMAR OPs</h1>
+                    <div class="email">Numero da OP <br>
+                        <input type="number" name="num_op" required>
+                    </div>
+                    <div class="email">Cliente <br>
+                        <input type="text" name="cliente" required>
+                    </div>
+                    <div class="email">Data do Pedido <br>
+                        <input type="date" name="dt_ped_op" required>
+                    </div>
+                    <div class="email">Previsão de Faturamento <br>
+                        <input type="date" name="prev_faturamento" required>
+                    </div>
+                    <div class="email">Quantidade Linear Total <br>
+                        <input type="number" name="qtd_linear" required>
+                    </div>
+                    <div class="email">Detalhe da OP<br>
+                        <input type="text" name="obs_op">
+                    </div>
+                    <div class="email">Quantidade Linear Total <br>
+                        <input type="number" name="resultado" readonly>
+                    </div>
 
-        <form action="/user/insert_op" method="POST">
-            <div class="centro-miolo">
-                <h1>PROGRAMAR OPs</h1>
-                <div class="email">Numero da OP <br>
-                    <input type="number" name="num_op" required>
-                </div>
-                <div class="email">Cliente <br>
-                    <input type="text" name="cliente" required>
-                </div>
-                <div class="email">Data do Pedido <br>
-                    <input type="date" name="dt_ped_op" required>
-                </div>
-                <div class="email">Previsão de Faturamento <br>
-                    <input type="date" name="prev_faturamento" required>
-                </div>
-                <div class="email">Quantidade Linear Total <br>
-                    <input type="number" name="qtd_linear" required>
-                </div>
-                <div class="email">Detalhe da OP<br>
-                    <input type="text" name="obs_op">
-                </div>
-                <div class="botao">
-                    <button> Salvar
-                </div>
-        </form>
+                    <div class="botao">
+                        <button> Salvar
+                    </div>
+            </form>
+        </header>
     </div>
 
 </body>
+
 </html>

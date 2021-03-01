@@ -10,7 +10,7 @@ router.get('/list_ops', userController.listOps)
 
 
 router.get('/insert_pedido', (req, res) => {res.render('../templates/insert_pedido')})
-router.post('/insert_pedido', userController.insertUser)
+router.post('/insert_pedido', userController.insertPedido)
 
 router.get('/edit/:id', userController.loadUser)
 router.post('/edit/:id', userController.editUser)
@@ -23,8 +23,5 @@ router.get('/insert_op', (req, res) => {res.render('../templates/insert_op')})
 router.post('/insert_op', userController.insertOP)
 
 
-//(req, res) => {res.render('../templates/dashboard')})  
-
-
-  
+ 
 module.exports = router

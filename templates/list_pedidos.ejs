@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/list_users.css">
+    <link rel="stylesheet" href="/public/list_pedidos.css">
     <title>Lista de Usuarios</title>
 
 </head>
@@ -31,7 +31,7 @@
                 <td class="headline">quantidade</td>
                 <td class="headline">linear</td>
                 <td class="headline">total</td>
-                <td class="headline"></td>
+                <td class="headline-fim"></td>
             </tr>
         </table>
     </div>
@@ -42,7 +42,7 @@
             <tbody>
                 <% for (let i=0; i < progpeds.length; i++) {%>
                     <div id='<%= progpeds[i]._id%>'>
-                        <form class="" method="POST" action="/user/delete/<%= progpeds[i]._id%>/?_method=DELETE">
+                        <form method="POST" action="/user/delete/<%= progpeds[i]._id%>/?_method=DELETE">
                             <tr>
                                 <td class="headline">
                                     <%= progpeds[i].pedido%>
@@ -71,33 +71,64 @@
                                 <td class="headline">
                                     <%= progpeds[i].total%>
                                 </td>
-                                <input name="id" value="<%= progpeds[i]._id%>" hidden>
                                 <td class="btnEdit"><a href="/user/edit/<%= progpeds[i]._id%>">Editar</a>
                                 </td>
                                 <td class="btnExcluir"><button onclick=" return window.confirm('Confirme a exclusão')"
                                         type="submit">Excluir</button></td>
                             </tr>
-                        </form>
-                    </div>
-            <tbody>
-                <div class="line-op">
-                    <tr class="">
-                        <td class="headline-op">Numero OP </td>
-                        <td class="headline-op">Cliente </td>
-                        <td class="headline-op">Pedido </td>
-                        <td class="headline-op">Prev. Faturamento </td>
-                        <td class="headline-op">Linear </td>
-                        <td class="headline-op">Obs. OP </td>
-                        <td class="headline-op">Resultado </td>
-                    </tr>
-                </div>
-            </tbody>
-    </div>
-    <%}%>
-        </tbody>
-        </thead>
-    </table>
 
+                            <tr>
+                                <td class="headline-2">Num. da OP</td>
+                                <td class="headline-2">Data Pedido</td>
+                                <td class="headline-2">Cliente</td>
+                                <td class="headline-2">Qtd. Linear</td>
+                                <td class="headline-2">Observação</td>
+                                <td class="headline-2">Prev. Faturamento</td>
+                                <td class="headline-2">Disponivel</td>
+                                <td class="btnExcluir"><button
+                                    onclick=" return window.confirm('Confirme a exclusão')"
+                                    type="submit">Excluir</button>
+
+                            </tr>
+                            <div class="header-op">
+                                <tr>
+                                    <div class="line-op">
+                                        <td class="headline">
+                                            <%= progpeds[i].num_op%>
+                                        </td>
+                                        <td class="headline">
+                                            <%= progpeds[i].cliente%>
+                                        </td>
+                                        <td class="headline">
+                                            <%= progpeds[i].dt_ped_op%>
+                                        </td>
+                                        <td class="headline">
+                                            <%= progpeds[i].prev_faturamento%>
+                                        </td>
+                                        <td class="headline">
+                                            <%= progpeds[i].qtd_linear%>
+                                        </td>
+                                        <td class="headline">
+                                            <%= progpeds[i].obs_op%>
+                                        </td>
+                                        <td class="headline">
+                                            <%= progpeds[i].resultado%>
+                                        </td>
+                                        </td>
+                                        <td class="adic_op"><a class="adicionar_op" href="/user/insert_op">+  OP</a>
+                                        </td>
+                                    </div>
+                                </tr>
+                            </div>
+                        </div>
+
+                        </form>
+                    <%}%>
+
+            </tbody>
+            </thead>
+        </table>
+    </div>
 </body>
 
 </html>
