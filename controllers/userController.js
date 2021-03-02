@@ -21,7 +21,7 @@ const userController = {
             quantidade: req.body.quantidade,
             linear: req.body.linear,
             total: req.body.total,
-            op: {            
+            op: [{
                 num_op: req.body.num_op,
                 cliente: req.body.cliente,
                 dt_ped_op: req.body.dt_ped_op,
@@ -29,7 +29,8 @@ const userController = {
                 qtd_linear: req.body.qtd_linear,
                 obs_op: req.body.obs_op,
                 resultado: req.body.resultado
-            }
+            } ],            
+        
         })
         try {
             const saveUsed = await progped.save()
@@ -40,32 +41,6 @@ const userController = {
             res.status(400).send(error)
         }
     },
-
-    // insertOP: async function (req, res) {
-
-    //     const adicop ={}
-         
-    //     adicop.num_op = req.body.num_op,
-    //     adicop.cliente = req.body.cliente,
-    //     adicop.dt_ped_op = req.body.dt_ped_op,
-    //     adicop.prev_faturamento = req.body.prev_faturamento,
-    //     adicop.qtd_linear = req.body.qtd_linear,
-    //     adicop.obs_op = req.body.obs_op,
-    //     adicop.resultado = req.body.resultado
-
-    //     let id = req.params.id
-
-    //     if (!id) {
-    //         id = req.body.id
-    //     }
-    //     try {
-    //         let doc = await Papeis.insertOne({ _id: id }, adicop)
-    //         res.redirect('/user/list_pedidos')
-    //     } catch (error) {
-    //         res.status(400).send(error)
-    //     }
-    // },
-
 
     insertOP: async function (req, res) {
 
