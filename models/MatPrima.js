@@ -21,8 +21,8 @@ const pedidoSchema = mongoose.Schema({
     quantidade: {type: Number, required: true, maxlength: 3},
     linear: {type: Number, required: true, maxlength: 6},
     total: {type: Number, maxlength: 6},
-    op:
-     {type: mongoose.Schema.Types.ObjectId, ref: 'opSchema'}
+    op: [opSchema]
+//     {type: mongoose.Schema.Types.ObjectId, ref: 'opSchema'}
 
 })
 

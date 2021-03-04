@@ -2,7 +2,7 @@ const express = require('express');
 const userController = require('../controllers/userController');
       router = express()
 
-router.get('/home', (req, res) => {res.render('../templates/home')})
+//router.get('/home', (req, res) => {res.render('../templates/home')})
 router.get('/dashboard', (req, res) => {res.render('../templates/dashboard')})
 
 router.get('/list_pedidos', userController.listUsers)

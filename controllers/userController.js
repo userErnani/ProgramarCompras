@@ -29,7 +29,7 @@ const userController = {
                 qtd_linear: req.body.qtd_linear,
                 obs_op: req.body.obs_op,
                 resultado: req.body.resultado
-            } ],            
+             }] ,            
         
         })
         try {
