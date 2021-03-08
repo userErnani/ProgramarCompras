@@ -22,6 +22,8 @@ router.delete('/deleteop/:id', userController.deleteOP)
 router.get('/insert_op', (req, res) => {res.render('../templates/insert_op')})
 router.post('/insert_op', userController.insertOP)
 
+router.post('/teste', userController.insertOP)
+
 
  
 module.exports = router

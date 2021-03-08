@@ -10,28 +10,35 @@ const userController = {
 
     insertPedido: async function (req, res) {
 
-        const progped = new Papeis({
+        bd_ops.map(bd_op => {
+            const bd_op = new bd_ops({
+                ...bd_op, progped:Papeis_id
+            })
+    }
+        const progped = new Papeis(req.body)
+        //{
 
-            pedido: req.body.pedido,
-            dtpedido: req.body.dtpedido,
-            preventrega: req.body.preventrega,
-            fornecedor: req.body.fornecedor,
-            material: req.body.material,
-            largura: req.body.largura,
-            quantidade: req.body.quantidade,
-            linear: req.body.linear,
-            total: req.body.total,
-            op: [{
-                num_op: req.body.num_op,
-                cliente: req.body.cliente,
-                dt_ped_op: req.body.dt_ped_op,
-                prev_faturamento: req.body.prev_faturamento,
-                qtd_linear: req.body.qtd_linear,
-                obs_op: req.body.obs_op,
-                resultado: req.body.resultado
-             }] ,            
-        
-        })
+            // pedido: req.body.pedido,
+            // dtpedido: req.body.dtpedido,
+            // preventrega: req.body.preventrega,
+            // fornecedor: req.body.fornecedor,
+            // material: req.body.material,
+            // largura: req.body.largura,
+            // quantidade: req.body.quantidade,
+            // linear: req.body.linear,
+            // total: req.body.total,
+            // op: [{
+            //     num_op: req.body.num_op,
+            //     cliente: req.body.cliente,
+            //     dt_ped_op: req.body.dt_ped_op,
+            //     prev_faturamento: req.body.prev_faturamento,
+            //     qtd_linear: req.body.qtd_linear,
+            //     obs_op: req.body.obs_op,
+                // resultado: req.body.resultado
+            //  }] ,            
+            console.log(req.body.op);
+
+        // })
         try {
             const saveUsed = await progped.save()
             console.log(progped);
@@ -44,15 +51,17 @@ const userController = {
 
     insertOP: async function (req, res) {
 
-        const adicop = new Ops({
-            num_op: req.body.num_op,
-            cliente: req.body.cliente,
-            dt_ped_op: req.body.dt_ped_op,
-            prev_faturamento: req.body.prev_faturamento,
-            qtd_linear: req.body.qtd_linear,
-            obs_op: req.body.obs_op,
-            resultado: req.body.resultado
-        })
+        const adicop = new Ops(req.body)
+
+        // const adicop = new Ops({
+            // num_op: req.body.num_op,
+            // cliente: req.body.cliente,
+            // dt_ped_op: req.body.dt_ped_op,
+            // prev_faturamento: req.body.prev_faturamento,
+            // qtd_linear: req.body.qtd_linear,
+            // obs_op: req.body.obs_op,
+            // resultado: req.body.resultado
+        // })
         try {
             const saveOp = await adicop.save()
             //res.send('Cadastrado com sucesso !!!!!')
