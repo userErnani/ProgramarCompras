@@ -6,40 +6,66 @@ const Ops = require('../models/Prog_Ops') // chamando o banco de dados para cada
 const str_data = require('../arquivos_acesso/conversor_data')
 
 
-const userController = {
+const userController = { 
 
     insertPedido: async function (req, res) {
 
-        const progped = new Papeis({
+        // const progped = new Papeis({
+            
 
-            pedido: req.body.pedido,
-            dtpedido: req.body.dtpedido,
-            preventrega: req.body.preventrega,
-            fornecedor: req.body.fornecedor,
-            material: req.body.material,
-            largura: req.body.largura,
-            quantidade: req.body.quantidade,
-            linear: req.body.linear,
-            total: req.body.total,
-            op: [{
-                num_op: req.body.num_op,
-                cliente: req.body.cliente,
-                dt_ped_op: req.body.dt_ped_op,
-                prev_faturamento: req.body.prev_faturamento,
-                qtd_linear: req.body.qtd_linear,
-                obs_op: req.body.obs_op,
-                resultado: req.body.resultado
-             }] ,            
+            // pedido: req.body.pedido,
+            // dtpedido: req.body.dtpedido,
+            // preventrega: req.body.preventrega,
+            // fornecedor: req.body.fornecedor,
+            // material: req.body.material,
+            // largura: req.body.largura,
+            // quantidade: req.body.quantidade,
+            // linear: req.body.linear,
+            // total: req.body.total,
+            // op: req.body.op
+            //     num_op: req.body.num_op,
+            //     cliente: req.body.cliente,
+            //     dt_ped_op: req.body.dt_ped_op,
+            //     prev_faturamento: req.body.prev_faturamento,
+            //     qtd_linear: req.body.qtd_linear,
+            //     obs_op: req.body.obs_op,
+            //     resultado: req.body.resultado
+            // }]      
         
-        })
-        try {
-            const saveUsed = await progped.save()
-            console.log(progped);
-            // res.send('Cadastrado com sucesso !!!!!')
-            res.redirect('/user/list_pedidos')
-        } catch (error) {
-            res.status(400).send(error)
-        }
+        // })
+    //     try {
+    //         const saveUsed = await progped.save()
+    //         console.log(progped);
+    //         // res.send('Cadastrado com sucesso !!!!!')
+    //         res.redirect('/user/list_pedidos')
+    //     } catch (error) {
+    //         res.status(400).send(error)
+    //     }
+
+    try {
+       
+        const progped = await Papeis.create(req.body)
+
+        await Promise.all(ops.map(async op => {
+
+            const matprimaOps = new Ops({...bd_op, matprima: matprima._id})
+
+            await matprimaOps.save()
+            
+            matprima.ops.push(matprimaOps)
+
+        }))
+
+        await progped.save()
+
+        return res.send({ progped })
+
+    } catch (error) {
+        console.log(error);
+        return res.status(400).send({ error: 'Erro na criação da coleção no banco de dados'})
+    }
+
+
     },
 
     insertOP: async function (req, res) {
@@ -62,7 +88,7 @@ const userController = {
         }
     },
 
-    loadUser: async function (req, res) {
+    loadPedido: async function (req, res) {
 
         let id = req.params.id
         try {
@@ -74,7 +100,7 @@ const userController = {
         }
     },
 
-    editUser: async function (req, res) {
+    editPedido: async function (req, res) {
         //nome para alterar o array
         let progped = {}
 
@@ -100,7 +126,7 @@ const userController = {
             res.status(400).send(error)
         }
     },
-    deleteUser: async function (req, res) {
+    deletePedido: async function (req, res) {
 
         let id = req.params.id
 
@@ -132,12 +158,12 @@ const userController = {
         }
     },
 
-    listUsers: async function (req, res) {
+    listPedidos: async function (req, res) {
 
         try {
             let docs = await Papeis.find({}).sort({ name: 1 })
-
-            res.render('../templates/list_pedidos', { progpeds: docs, error: false, body: {} })
+            res.send({docs})
+            // res.render('../templates/list_pedidos', { progpeds: docs, error: false, body: {} })
         } catch (error) {
             res.status(404).send(error)
         }
