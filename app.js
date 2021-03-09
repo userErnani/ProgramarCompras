@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
       app = express()
+      PORT = 3001
       userRouter = require('./routers/userRouter')
       db = require('./connectionDb/db')
       bodyParser = require('body-parser')
@@ -21,8 +22,8 @@ app.use('/public', express.static('./public'))
 app.use('/', express.json(), userRouter)
 app.use('/user', express.json(), userRouter)
 
-app.listen(process.env.PORT, ()=> {
-    console.log(`Trabalhando na porta ${process.env.PORT}`);
+app.listen(PORT, ()=> {
+    console.log(`Trabalhando na porta ${PORT}`);
 })
 
 
