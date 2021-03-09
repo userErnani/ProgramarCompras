@@ -2,10 +2,6 @@
 const Papeis = require('../models/MatPrima') // chamando o banco de dados para cadastrar usuarios
 const Ops = require('../models/Prog_Ops') // chamando o banco de dados para cadastrar usuarios
 
-
-const str_data = require('../arquivos_acesso/conversor_data')
-
-
 const userController = { 
 
     insertPedido: async function (req, res) {
