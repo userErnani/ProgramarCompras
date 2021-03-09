@@ -25,6 +25,9 @@ body {
 .btn-01-return, .btn-02-newuser{
     color: white;
 }
+.pedido-op{
+    background-color: blue;
+}
 .headline{
     border: 1px solid black;
     width: 12vw;

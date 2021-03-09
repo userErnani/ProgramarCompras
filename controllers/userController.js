@@ -1,77 +1,34 @@
-// nome que vai ser usado para falar com o BD
-const Papeis = require('../models/MatPrima') // chamando o banco de dados para cadastrar usuarios
-const Ops = require('../models/Prog_Ops') // chamando o banco de dados para cadastrar usuarios
-
-
-const str_data = require('../arquivos_acesso/conversor_data')
-
+const Papeis = require('../models/MatPrima')
+ // chamando o banco de dados para cadastrar as MP
+const Ops = require('../models/Prog_Ops')
+ // chamando o banco de dados para cadastrar as OPs
 
 const userController = {
 
     insertPedido: async function (req, res) {
 
-        bd_ops.map(bd_op => {
-            const bd_op = new bd_ops({
-                ...bd_op, progped:Papeis_id
-            })
-    }
         const progped = new Papeis(req.body)
-        //{
-
-            // pedido: req.body.pedido,
-            // dtpedido: req.body.dtpedido,
-            // preventrega: req.body.preventrega,
-            // fornecedor: req.body.fornecedor,
-            // material: req.body.material,
-            // largura: req.body.largura,
-            // quantidade: req.body.quantidade,
-            // linear: req.body.linear,
-            // total: req.body.total,
-            // op: [{
-            //     num_op: req.body.num_op,
-            //     cliente: req.body.cliente,
-            //     dt_ped_op: req.body.dt_ped_op,
-            //     prev_faturamento: req.body.prev_faturamento,
-            //     qtd_linear: req.body.qtd_linear,
-            //     obs_op: req.body.obs_op,
-                // resultado: req.body.resultado
-            //  }] ,            
-            console.log(req.body.op);
-
-        // })
         try {
             const saveUsed = await progped.save()
-            console.log(progped);
-            // res.send('Cadastrado com sucesso !!!!!')
             res.redirect('/user/list_pedidos')
         } catch (error) {
             res.status(400).send(error)
         }
     },
 
+    // esta rota cadastra em outro banco de dados
     insertOP: async function (req, res) {
 
         const adicop = new Ops(req.body)
 
-        // const adicop = new Ops({
-            // num_op: req.body.num_op,
-            // cliente: req.body.cliente,
-            // dt_ped_op: req.body.dt_ped_op,
-            // prev_faturamento: req.body.prev_faturamento,
-            // qtd_linear: req.body.qtd_linear,
-            // obs_op: req.body.obs_op,
-            // resultado: req.body.resultado
-        // })
         try {
             const saveOp = await adicop.save()
-            //res.send('Cadastrado com sucesso !!!!!')
             res.redirect('/user/list_ops')
         } catch (error) {
             res.status(400).send(error)
         }
     },
-
-    loadUser: async function (req, res) {
+    loadPedido: async function (req, res) {
 
         let id = req.params.id
         try {
@@ -82,9 +39,7 @@ const userController = {
             res.status(404).send(error);
         }
     },
-
-    editUser: async function (req, res) {
-        //nome para alterar o array
+    editPedido: async function (req, res) {
         let progped = {}
 
             progped.pedido = req.body.pedido,
@@ -109,7 +64,7 @@ const userController = {
             res.status(400).send(error)
         }
     },
-    deleteUser: async function (req, res) {
+    deletePedido: async function (req, res) {
 
         let id = req.params.id
 
@@ -141,7 +96,7 @@ const userController = {
         }
     },
 
-    listUsers: async function (req, res) {
+    listPedidos: async function (req, res) {
 
         try {
             let docs = await Papeis.find({}).sort({ name: 1 })
@@ -151,7 +106,6 @@ const userController = {
             res.status(404).send(error)
         }
     }, 
-
     listOps: async function (req, res) {
 
         try {
