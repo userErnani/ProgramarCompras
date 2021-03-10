@@ -1,14 +1,14 @@
 // nome que vai ser usado para falar com o BD
-const Papeis = require('../models/MatPrima') // chamando o banco de dados para cadastrar usuarios
-const Ops = require('../models/Prog_Ops') // chamando o banco de dados para cadastrar usuarios
+const Materia_prima = require('../models/Materia_prima') // chamando o banco de dados para cadastrar usuarios
+const Programar_op = require('../models/Programar_op') // chamando o banco de dados para cadastrar usuarios
 
 const userController = { 
 
     insertPedido: async function (req, res) {
 
-        // const progped = new Papeis({
+        // const progped = new MatPrima({
             
-
+ 
             // pedido: req.body.pedido,
             // dtpedido: req.body.dtpedido,
             // preventrega: req.body.preventrega,
@@ -18,7 +18,7 @@ const userController = {
             // quantidade: req.body.quantidade,
             // linear: req.body.linear,
             // total: req.body.total,
-            // op: req.body.op
+            // programar_op: req.body.op
             //     num_op: req.body.num_op,
             //     cliente: req.body.cliente,
             //     dt_ped_op: req.body.dt_ped_op,
@@ -40,25 +40,25 @@ const userController = {
 
     try {
        
-        const progped = await Papeis.create(req.body)
+        const materiaprima = await Materia_prima.create(req.body)
 
-        await Promise.all(ops.map(async op => {
+        // await Promise.all(Programar_op.map(async op => {
 
-            const matprimaOps = new Ops({...bd_op, matprima: matprima._id})
+        //     const matprimaOps = new Programar_op({...Programar_op, materiaprima: materiaprima._id})
 
-            await matprimaOps.save()
+        //     await materiaprima.save()
             
-            matprima.ops.push(matprimaOps)
+        //     materiaprima.ops.push(materiaprima)
 
-        }))
+        // }))
 
-        await progped.save()
+        await materiaprima.save()
 
-        return res.send({ progped })
+        return res.send({ materiaprima })
 
     } catch (error) {
         console.log(error);
-        return res.status(400).send({ error: 'Erro na criação da coleção no banco de dados'})
+        return res.status(400).send({error}) // 'Erro na criação da coleção no banco de dados'})
     }
 
 
@@ -66,7 +66,7 @@ const userController = {
 
     insertOP: async function (req, res) {
 
-        const adicop = new Ops({
+        const adicop = new Programar_op({
             num_op: req.body.num_op,
             cliente: req.body.cliente,
             dt_ped_op: req.body.dt_ped_op,
@@ -88,7 +88,7 @@ const userController = {
 
         let id = req.params.id
         try {
-            let doc = await Papeis.findById(id)
+            let doc = await materiaprima.findById(id)
             res.render('../templates/edit_pedido', { error: false, body: doc })
         }
         catch (error) {
@@ -116,7 +116,7 @@ const userController = {
             id = req.body.id
         }
         try {
-            let doc = await Papeis.updateOne({ _id: id }, progped)
+            let doc = await Materia_prima.updateOne({ _id: id }, progped)
             res.redirect('/user/list_pedidos')
         } catch (error) {
             res.status(400).send(error)
@@ -130,7 +130,7 @@ const userController = {
             id = req.body.id
         }
         try {
-            let doc = await Papeis.findByIdAndDelete(id)
+            let doc = await Materia_prima.findByIdAndDelete(id)
             res.redirect('/user/list_pedidos')
         }
         catch (error) {
@@ -145,7 +145,7 @@ const userController = {
             id = req.body.id
         }
         try {
-            let doc = await Ops.findByIdAndDelete(id)
+            let doc = await Programar_op.findByIdAndDelete(id)
             //res.send('deletado')
             res.redirect('/user/list_ops')
         }
@@ -157,8 +157,8 @@ const userController = {
     listPedidos: async function (req, res) {
 
         try {
-            let docs = await Papeis.find({}).sort({ name: 1 })
-            res.send({docs})
+            let docs = await Materia_prima.find({}).sort({ name: 1 })
+            res.send(docs)
             // res.render('../templates/list_pedidos', { progpeds: docs, error: false, body: {} })
         } catch (error) {
             res.status(404).send(error)
@@ -168,7 +168,7 @@ const userController = {
     listOps: async function (req, res) {
 
         try {
-            let docs = await Ops.find({}).sort({ name: 1 })
+            let docs = await Programar_op.find({}).sort({ name: 1 })
 
             res.render('../templates/list_ops', { adicops: docs, error: false, body: {} })
             //res.send('Passei aqui')

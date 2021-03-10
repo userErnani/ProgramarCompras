@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
-const opSchema = mongoose.Schema({
-    matprima: {type: mongoose.Schema.Types.ObjectId, ref: 'bd_matprima'},
+const Programar_opSchema = mongoose.Schema({
+
+    matprima: {type: mongoose.Schema.Types.ObjectId, ref: 'Materia_prima'},
     num_op: {type: Number, maxlength: 6},
     cliente: {type: String, maxlength: 25},
     dt_ped_op: {type: String, required: false},
@@ -11,4 +12,4 @@ const opSchema = mongoose.Schema({
     resultado: {type: Number}
 })
 
-module.exports = mongoose.model('bd_op', opSchema)
+module.exports = mongoose.model('Programar_op', Programar_opSchema)
