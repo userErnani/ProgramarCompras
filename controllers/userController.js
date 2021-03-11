@@ -40,21 +40,23 @@ const userController = {
 
     try {
        
+        const programar_ops = req.body.programarops
+
         const materiaprima = await Materia_prima.create(req.body)
 
-        // await Promise.all(Programar_op.map(async op => {
+        await Promise.all(programar_ops.map( async programar_op => {
 
-        //     const matprimaOps = new Programar_op({...Programar_op, materiaprima: materiaprima._id})
+            const materiaprimaprogramarop =  new Programar_op({ ...programar_op, materia_prima: materia_prima._id})
 
-        //     await materiaprima.save()
-            
-        //     materiaprima.ops.push(materiaprima)
+            await materiaprimaprogramarop.save()
 
-        // }))
+            materiaprima.programar_op.push(programar_op)
+    
+        }))
 
         await materiaprima.save()
 
-        return res.send({ materiaprima })
+        return res.send({ materiaprima, programar_op })
 
     } catch (error) {
         console.log(error);
@@ -157,9 +159,9 @@ const userController = {
     listPedidos: async function (req, res) {
 
         try {
-            let docs = await Materia_prima.find({}).sort({ name: 1 })
-            res.send(docs)
-            // res.render('../templates/list_pedidos', { progpeds: docs, error: false, body: {} })
+            let materia_prima = await Materia_prima.find({}).sort({ name: 1 })
+            res.send(materia_prima)
+            // res.render('../templates/list_pedidos', { progpeds: materia_prima, error: false, body: {} })
         } catch (error) {
             res.status(404).send(error)
         }

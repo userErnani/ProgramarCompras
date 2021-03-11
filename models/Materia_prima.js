@@ -10,7 +10,7 @@ const Materia_primaSchema = mongoose.Schema({
     quantidade: {type: Number, required: true, maxlength: 3},
     linear: {type: Number, required: true, maxlength: 6},
     total: {type: Number, maxlength: 6},
-    programarop: [{
+    programarops: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'Programar_op'
         }]
     })
