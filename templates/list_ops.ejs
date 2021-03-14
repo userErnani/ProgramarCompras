@@ -38,34 +38,34 @@
     <div class="header-op">
         <table id="tabela-op">
             <tbody>
-                <% for (let i=0; i < adicops.length; i++) {%>
-                    <div id='<%= adicops[i]._id%>'>
-                        <form class="" method="POST" action="/user/deleteOP/<%= adicops[i]._id%>/?_method=DELETE">
+                <% for (let i=0; i < listops.length; i++) {%>
+                    <div id='<%= listops[i]._id%>'>
+                        <form class="" method="POST" action="/user/deleteOP/<%= listops[i]._id%>/?_method=DELETE">
                             <tr>
                                 <div class="line-op">
                                     <td class="headline">
-                                        <%= adicops[i].num_op%>
+                                        <%= listops[i].num_op%>
                                     </td>
                                     <td class="headline">
-                                        <%= adicops[i].dt_ped_op%>
+                                        <%= listops[i].dt_ped_op%>
                                     </td>
                                     <td class="headline">
-                                        <%= adicops[i].cliente%>
+                                        <%= listops[i].cliente%>
                                     </td>
                                     <td class="headline">
-                                        <%= adicops[i].qtd_linear%>
+                                        <%= listops[i].qtd_linear%>
                                     </td>
                                     <td class="headline">
-                                        <%= adicops[i].obs_op%>
+                                        <%= listops[i].obs_op%>
                                     </td>
                                     <td class="headline">
-                                        <%= adicops[i].prev_faturamento%>
+                                        <%= listops[i].prev_faturamento%>
                                     </td>
 
                                     <td class="headline">
-                                        <%= adicops[i].resultado%>
+                                        <%= listops[i].resultado%>
                                     </td>
-                                    <input name="id" value="<%= adicops[i]._id%>" hidden>
+                                    <input name="id" value="<%= listops[i]._id%>" hidden>
                                     <td class="btnExcluir"><button
                                             onclick=" return window.confirm('Confirme a exclusão')"
                                             type="submit">Excluir</button></td>

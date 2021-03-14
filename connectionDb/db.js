@@ -1,9 +1,8 @@
-require('dotenv').config()
 
 const mongoose = require('mongoose')
 
 // conexão com o banco de dados local - caso o BD não exista, ele será criado
-mongoose.connect('mongodb://localhost/novoCadastro',
+mongoose.connect('mongodb://localhost/ComprasMP',
 { useNewUrlParser: true, useUnifiedTopology: true})
 
 // conexão com o banco de dados nas nuvens - caso o BD não exista, ele será criado

@@ -23,7 +23,7 @@
     <div class="header">
         <thead>
         <tbody>
-            <% for (let i=0; i < programarops.length; i++) {%>
+            <% for (let i=0; i < listmps.length; i++) {%>
                 <table id="tabela">
                     <tr class="line-title">
                         <td class="headline">Pedido</td>
@@ -38,37 +38,37 @@
                         <td class="headline-fim"></td>
                     </tr>
 
-                    <div id='<%= programarops[i]._id%>'>
-                        <form method="POST" action="/user/delete/<%= programarops[i]._id%>/?_method=DELETE">
+                    <div id='<%= listmps[i]._id%>'>
+                        <form method="POST" action="/user/delete/<%= listmps[i]._id%>/?_method=DELETE">
                             <tr>
                                 <td class="headline">
-                                    <%= programarops[i].pedido%>
+                                    <%= listmps[i].pedido%>
                                 </td>
                                 <td class="headline">
-                                    <%= programarops[i].dtpedido%>
+                                    <%= listmps[i].dtpedido%>
                                 </td>
                                 <td class="headline">
-                                    <%= programarops[i].preventrega%>
+                                    <%= listmps[i].preventrega%>
                                 </td>
                                 <td class="headline">
-                                    <%= programarops[i].fornecedor%>
+                                    <%= listmps[i].fornecedor%>
                                 </td>
                                 <td class="headline">
-                                    <%= programarops[i].material%>
+                                    <%= listmps[i].material%>
                                 </td>
                                 <td class="headline">
-                                    <%= programarops[i].largura%>
+                                    <%= listmps[i].largura%>
                                 </td>
                                 <td class="headline">
-                                    <%= programarops[i].quantidade%>
+                                    <%= listmps[i].quantidade%>
                                 </td>
                                 <td class="headline">
-                                    <%= programarops[i].linear%>
+                                    <%= listmps[i].linear%>
                                 </td>
                                 <td class="headline">
-                                    <%= programarops[i].total%>
+                                    <%= listmps[i].total%>
                                 </td>
-                                <td class="btnEdit"><a href="/user/edit/<%= programarops[i]._id%>">Editar</a>
+                                <td class="btnEdit"><a href="/user/edit/<%= listmps[i]._id%>">Editar</a>
                                 </td>
                                 <td class="btnExcluir"><button onclick=" return window.confirm('Confirme a exclusão')"
                                         type="submit">Excluir</button></td>
@@ -90,25 +90,25 @@
                                 <tr>
                                     <div class="line-op">
                                         <td class="headline">
-                                            <%= programarops[i].num_op%>
+                                            <%= listmps[i].num_op%>
                                         </td>
                                         <td class="headline">
-                                            <%= programarops[i].cliente%>
+                                            <%= listmps[i].cliente%>
                                         </td>
                                         <td class="headline">
-                                            <%= programarops[i].dt_ped_op%>
+                                            <%= listmps[i].dt_ped_op%>
                                         </td>
                                         <td class="headline">
-                                            <%= programarops[i].prev_faturamento%>
+                                            <%= listmps[i].prev_faturamento%>
                                         </td>
                                         <td class="headline">
-                                            <%= programarops[i].qtd_linear%>
+                                            <%= listmps[i].qtd_linear%>
                                         </td>
                                         <td class="headline">
-                                            <%= programarops[i].obs_op%>
+                                            <%= listmps[i].obs_op%>
                                         </td>
                                         <td class="headline">
-                                            <%= programarops[i].resultado%>
+                                            <%= listmps[i].resultado%>
                                         </td>
                                         </td>
                                         <td class="adic_op"><a class="adicionar_op" href="/user/insert_op">+ OP</a>
