@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const mongoose = require('mongoose')
 
+// conexão com o banco de dados local - caso o BD não exista, ele será criado
 mongoose.connect('mongodb://localhost/novoCadastro',
 { useNewUrlParser: true, useUnifiedTopology: true})
 

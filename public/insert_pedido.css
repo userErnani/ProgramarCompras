@@ -21,7 +21,7 @@ body{
     margin: auto;
     width: 40vw;
     height: 85vh;
-    border: solid 1.5px rgb(0, 2, 26);
+    border: solid 1.5px white;
     border-radius: 5px;
     position: absolute;
     top: 50%;

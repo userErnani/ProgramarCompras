@@ -1,8 +1,7 @@
 const mongoose = require('mongoose')
 
-const Programar_opSchema = mongoose.Schema({
-
-    materia_prima: {type: mongoose.Schema.Types.ObjectId, ref: 'Materia_prima'},
+const ordemproducaoSchema = mongoose.Schema({
+    bd_matprima:{type: mongoose.Schema.Types.ObjectId, ref: 'bd_matprima'},
     num_op: {type: Number, maxlength: 6},
     cliente: {type: String, maxlength: 25},
     dt_ped_op: {type: String, required: false},
@@ -12,4 +11,4 @@ const Programar_opSchema = mongoose.Schema({
     resultado: {type: Number}
 })
 
-module.exports = mongoose.model('Programar_op', Programar_opSchema)
+module.exports = mongoose.model('ordemproducao', ordemproducaoSchema)

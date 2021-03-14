@@ -1,82 +1,56 @@
 // nome que vai ser usado para falar com o BD
-const Materia_prima = require('../models/Materia_prima') // chamando o banco de dados para cadastrar usuarios
-const Programar_op = require('../models/Programar_op') // chamando o banco de dados para cadastrar usuarios
+const MateriaPrima = require('../models/MateriaPrima') // chamando o banco de dados para cadastrar usuarios
+const OrdemProducao = require('../models/OrdemProducao') // chamando o banco de dados para cadastrar usuarios
 
-const userController = { 
+
+const str_data = require('../arquivos_acesso/conversor_data')
+
+
+const userController = {
 
     insertPedido: async function (req, res) {
 
-        // const progped = new MatPrima({
-            
- 
-            // pedido: req.body.pedido,
-            // dtpedido: req.body.dtpedido,
-            // preventrega: req.body.preventrega,
-            // fornecedor: req.body.fornecedor,
-            // material: req.body.material,
-            // largura: req.body.largura,
-            // quantidade: req.body.quantidade,
-            // linear: req.body.linear,
-            // total: req.body.total,
-            // programar_op: req.body.op
-            //     num_op: req.body.num_op,
-            //     cliente: req.body.cliente,
-            //     dt_ped_op: req.body.dt_ped_op,
-            //     prev_faturamento: req.body.prev_faturamento,
-            //     qtd_linear: req.body.qtd_linear,
-            //     obs_op: req.body.obs_op,
-            //     resultado: req.body.resultado
-            // }]      
-        
-        // })
-    //     try {
-    //         const saveUsed = await progped.save()
-    //         console.log(progped);
-    //         // res.send('Cadastrado com sucesso !!!!!')
-    //         res.redirect('/user/list_pedidos')
-    //     } catch (error) {
-    //         res.status(400).send(error)
-    //     }
-
-    try {
+        try {
        
-        const programar_ops = req.body.programarops
-
-        const materiaprima = await Materia_prima.create(req.body)
-
-        await Promise.all(programar_ops.map( async programar_op => {
-
-            const materiaprimaprogramarop =  new Programar_op({ ...programar_op, materia_prima: materia_prima._id})
-
-            await materiaprimaprogramarop.save()
-
-            materiaprima.programar_op.push(programar_op)
+            const programar_ops = req.body.programarops
     
-        }))
-
-        await materiaprima.save()
-
-        return res.send({ materiaprima, programar_op })
-
-    } catch (error) {
-        console.log(error);
-        return res.status(400).send({error}) // 'Erro na criação da coleção no banco de dados'})
-    }
-
-
-    },
+            const materiaprima = await MateriaPrima.create(req.body)
+    
+            // await Promise.all(programar_ops.map( async programar_op => {
+    
+       
+            //         })
+    
+            //      await MPprogramarop.save()
+    
+                // materiaprima.programar_op.push(programar_op)
+        
+        //    }))
+    
+            await materiaprima.save()
+   
+            res.redirect('/user/list_pedidos')
+        
+    
+        } catch (error) {
+            console.log(error);
+            return res.status(400).send({error}) // 'Erro na criação da coleção no banco de dados'})
+        }
+        },
 
     insertOP: async function (req, res) {
 
-        const adicop = new Programar_op({
-            num_op: req.body.num_op,
-            cliente: req.body.cliente,
-            dt_ped_op: req.body.dt_ped_op,
-            prev_faturamento: req.body.prev_faturamento,
-            qtd_linear: req.body.qtd_linear,
-            obs_op: req.body.obs_op,
-            resultado: req.body.resultado
-        })
+        const adicop = new OrdemProducao(req.body)
+
+        // const adicop = new OrdemProducao({
+            // num_op: req.body.num_op,
+            // cliente: req.body.cliente,
+            // dt_ped_op: req.body.dt_ped_op,
+            // prev_faturamento: req.body.prev_faturamento,
+            // qtd_linear: req.body.qtd_linear,
+            // obs_op: req.body.obs_op,
+            // resultado: req.body.resultado
+        // })
         try {
             const saveOp = await adicop.save()
             //res.send('Cadastrado com sucesso !!!!!')
@@ -90,7 +64,7 @@ const userController = {
 
         let id = req.params.id
         try {
-            let doc = await materiaprima.findById(id)
+            let doc = await MateriaPrima.findById(id)
             res.render('../templates/edit_pedido', { error: false, body: doc })
         }
         catch (error) {
@@ -118,7 +92,7 @@ const userController = {
             id = req.body.id
         }
         try {
-            let doc = await Materia_prima.updateOne({ _id: id }, progped)
+            let doc = await MateriaPrima.updateOne({ _id: id }, progped)
             res.redirect('/user/list_pedidos')
         } catch (error) {
             res.status(400).send(error)
@@ -132,7 +106,7 @@ const userController = {
             id = req.body.id
         }
         try {
-            let doc = await Materia_prima.findByIdAndDelete(id)
+            let doc = await MateriaPrima.findByIdAndDelete(id)
             res.redirect('/user/list_pedidos')
         }
         catch (error) {
@@ -147,7 +121,7 @@ const userController = {
             id = req.body.id
         }
         try {
-            let doc = await Programar_op.findByIdAndDelete(id)
+            let doc = await OrdemProducao.findByIdAndDelete(id)
             //res.send('deletado')
             res.redirect('/user/list_ops')
         }
@@ -159,9 +133,9 @@ const userController = {
     listPedidos: async function (req, res) {
 
         try {
-            let materia_prima = await Materia_prima.find({}).sort({ name: 1 })
-            res.send(materia_prima)
-            // res.render('../templates/list_pedidos', { progpeds: materia_prima, error: false, body: {} })
+            let materiaprima = await MateriaPrima.find({}).sort({ name: 1 })
+
+            res.render('../templates/list_pedidos', { programarops: materiaprima, error: false, body: {} })
         } catch (error) {
             res.status(404).send(error)
         }
@@ -170,7 +144,7 @@ const userController = {
     listOps: async function (req, res) {
 
         try {
-            let docs = await Programar_op.find({}).sort({ name: 1 })
+            let docs = await OrdemProducao.find({}).sort({ name: 1 })
 
             res.render('../templates/list_ops', { adicops: docs, error: false, body: {} })
             //res.send('Passei aqui')
