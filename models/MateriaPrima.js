@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const materiaprimaSchema = mongoose.Schema({
+const MateriaPrimaSchema = mongoose.Schema({
     pedido: {type: Number, required: true, maxlength: 6},
     dtpedido: {type: String, required: true},
     preventrega: {type: String, required:true},
@@ -10,10 +10,9 @@ const materiaprimaSchema = mongoose.Schema({
     quantidade: {type: Number, required: true, maxlength: 3},
     linear: {type: Number, required: true, maxlength: 6},
     total: {type: Number, maxlength: 6},
-    bd_op: [
-        {type: mongoose.Schema.Types.ObjectId, ref: 'ordemproducao',
-        required: true}
+    programarops: [ 
+        {type: mongoose.Schema.Types.ObjectId, ref: 'OrdemProducao', required: false}
     ]
 })
 
-module.exports = mongoose.model('materiaprima', materiaprimaSchema)
+module.exports = mongoose.model('MateriaPrima', MateriaPrimaSchema)

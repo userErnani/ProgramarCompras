@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 
-const ordemproducaoSchema = mongoose.Schema({
-    bd_matprima:{type: mongoose.Schema.Types.ObjectId, ref: 'bd_matprima'},
+
+    OrdemproducaoSchema = mongoose.Schema({
+
     num_op: {type: Number, maxlength: 6},
     cliente: {type: String, maxlength: 25},
     dt_ped_op: {type: String, required: false},
@@ -11,4 +12,4 @@ const ordemproducaoSchema = mongoose.Schema({
     resultado: {type: Number}
 })
 
-module.exports = mongoose.model('ordemproducao', ordemproducaoSchema)
+module.exports = mongoose.model('Ordemproducao', OrdemproducaoSchema)

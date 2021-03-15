@@ -8,24 +8,29 @@ const userController = {
 
         try {
 
-            const programar_ops = req.body.programarops
+
+            const { pedido, programarops } = req.body
 
             const materiaprima = await MateriaPrima.create(req.body)
 
-            // await Promise.all(programar_ops.map( async programar_op => {
-            //         })
-            //      await MPprogramarop.save()
-            // materiaprima.programar_op.push(programar_op)
-            //    }))
+            await Promise.all(programarops.map(async programarop => {
+
+                const programaropMP = new OrdemProducao({ ...programarop, materiaprima: materiaprima._id })
+
+                await OrdemProducao.save()
+
+                materiaprima.programarops.push(programaropMP)
+
+            }))
 
             await materiaprima.save()
 
+            //res.send({materiaprima})
             res.redirect('/user/list_pedidos')
-
 
         } catch (error) {
             console.log(error);
-            return res.status(400).send({ error }) // 'Erro na criação da coleção no banco de dados'})
+            return res.status(400).send({ error })
         }
     },
 
@@ -126,7 +131,7 @@ const userController = {
             let docs = await OrdemProducao.find({}).sort({ name: 1 })
 
             res.render('../templates/list_ops', { listops: docs, error: false, body: {} })
-            } catch (error) {
+        } catch (error) {
             res.status(404).send(error)
         }
     }
