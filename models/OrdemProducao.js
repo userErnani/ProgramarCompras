@@ -2,7 +2,8 @@ const mongoose = require('mongoose')
 
 
     OrdemproducaoSchema = mongoose.Schema({
-
+    programarops:
+    {type: mongoose.Schema.Types.ObjectId, ref: 'MateriaPrima', required: true},    
     num_op: {type: Number, maxlength: 6},
     cliente: {type: String, maxlength: 25},
     dt_ped_op: {type: String, required: false},
@@ -10,6 +11,7 @@ const mongoose = require('mongoose')
     qtd_linear: {type: Number, required: false, maxlength: 5},
     obs_op: {type: String, maxlength: 30},
     resultado: {type: Number}
+    
 })
 
 module.exports = mongoose.model('Ordemproducao', OrdemproducaoSchema)

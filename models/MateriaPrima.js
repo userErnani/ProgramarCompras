@@ -11,7 +11,7 @@ const MateriaPrimaSchema = mongoose.Schema({
     linear: {type: Number, required: true, maxlength: 6},
     total: {type: Number, maxlength: 6},
     programarops: [ 
-        {type: mongoose.Schema.Types.ObjectId, ref: 'OrdemProducao', required: false}
+        {type: mongoose.Schema.Types.ObjectId, ref: 'OrdemProducao', required: true}
     ]
 })
 

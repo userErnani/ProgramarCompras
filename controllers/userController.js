@@ -8,20 +8,21 @@ const userController = {
 
         try {
 
-
-            const { pedido, programarops } = req.body
-
             const materiaprima = await MateriaPrima.create(req.body)
+
+            const {programarops, pedido} = req.body
 
             await Promise.all(programarops.map(async programarop => {
 
-                const programaropMP = new OrdemProducao({ ...programarop, materiaprima: materiaprima._id })
+                const programarMP = new OrdemProducao({ ...programarop, materiaprima: materiaprima._id })
 
                 await OrdemProducao.save()
 
-                materiaprima.programarops.push(programaropMP)
+                materiaprima.programarops.push(programarMP)
 
             }))
+
+            console.log(programarops);
 
             await materiaprima.save()
 
