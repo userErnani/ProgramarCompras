@@ -1,6 +1,7 @@
-const mongoose = require('mongoose')
+const mongoose = require('../connectionDb/index')
 
-const MateriaPrimaSchema = mongoose.Schema({
+const ProjectSchema = new mongoose.Schema({
+    
     pedido: {type: Number, required: true, maxlength: 6},
     dtpedido: {type: String, required: true},
     preventrega: {type: String, required:true},
@@ -10,9 +11,12 @@ const MateriaPrimaSchema = mongoose.Schema({
     quantidade: {type: Number, required: true, maxlength: 3},
     linear: {type: Number, required: true, maxlength: 6},
     total: {type: Number, maxlength: 6},
-    programarops: [ 
-        {type: mongoose.Schema.Types.ObjectId, ref: 'OrdemProducao', required: true}
-    ]
+
+
+    tasks: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Task'
+    }],
 })
 
-module.exports = mongoose.model('MateriaPrima', MateriaPrimaSchema)
+module.exports = mongoose.model('Project', ProjectSchema)

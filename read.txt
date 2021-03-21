@@ -9,3 +9,15 @@
     () Produtos      
        
        
+                   let insertOP = {}
+
+            insertOP.pedido = "",
+            insertOP.dtpedido = "",
+            insertOP.preventrega = "",
+            insertOP.fornecedor = "",
+            insertOP.material = "",
+            insertOP.largura = "",
+            insertOP.quantidade = "",
+            insertOP.linear = "",
+            insertOP.total = ""
+

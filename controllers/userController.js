@@ -1,57 +1,114 @@
-const MateriaPrima = require('../models/MateriaPrima')
-const OrdemProducao = require('../models/OrdemProducao')
+const Project = require('../models/project')
+const Task = require('../models/task')
 
 
 const userController = {
 
     insertPedido: async function (req, res) {
 
-        try {
+    try {
+        const { pedido, dtpedido,
+            preventrega, material, fornecedor,
+            largura, quantidade, linear, total } = req.body
 
-            const materiaprima = await MateriaPrima.create(req.body)
+        // cadastrando e recuperando projeto da coleção
+        const project = await Project.create({
+            pedido, dtpedido,
+            preventrega, material, fornecedor,
+            largura, quantidade, linear, total })
 
-            const {programarops, pedido} = req.body
+            let tasks = [{
+            "num_op" : "",
+            "cliente" : "",
+            "dt_ped_op" : "",
+            "prev_faturamento" : "",
+            "qtd_linear" : "",
+            "obs_op" : "",
+            "resultado" : "",
+            }]
 
-            await Promise.all(programarops.map(async programarop => {
+        // criando tasks
+        await Promise.all(tasks.map(async task => {
+            const projectTask = new Task({ ...task, project: project._id })
 
-                const programarMP = new OrdemProducao({ ...programarop, materiaprima: materiaprima._id })
+            // cadastrando na coleção de tasks 
+            await projectTask.save()
 
-                await OrdemProducao.save()
+            // inserindo no array do projeto
+            project.tasks.push(projectTask)
+        }))
 
-                materiaprima.programarops.push(programarMP)
+        // atualizando o projeto com o array de tasks
+        await project.save()
 
-            }))
+        //res.redirect('/user/list_pedidos')
 
-            console.log(programarops);
+         return res.send({ project })
 
-            await materiaprima.save()
+    } catch (error) {
 
-            //res.send({materiaprima})
-            res.redirect('/user/list_pedidos')
-
-        } catch (error) {
-            console.log(error);
-            return res.status(400).send({ error })
-        }
+        res.status(400).send({ error: 'erro ao criar o projeto.' })
+    }
     },
 
     insertOP: async function (req, res) {
 
-        const insertOP = new OrdemProducao(req.body)
-
         try {
-            const saveOp = await insertOP.save()
-            res.redirect('/user/list_ops')
-        } catch (error) {
-            res.status(400).send(error)
-        }
-    },
+
+        let project = await Project.find({}).sort({ name: 1 })
+
+        // alterando e recuperando projeto da coleção
+        // const project = await Project.findByIdAndUpdate(req.params.projectId, {
+        //     pedido, dtpedido,
+        //     preventrega, material, fornecedor,
+        //     largura, quantidade, linear, total
+        // }, { new: true })
+
+        // removendo tasks andes de re-cadastrar
+        project.tasks = []
+        await Task.remove({ project: project._id })
+
+        // criando tasks
+        await Promise.all(tasks.map(async task => {
+            const projectTask = new Task({ ...task, project: project._id })
+
+            // cadastrando na coleção de tasks 
+            await projectTask.save()
+
+            // inserindo no array do projeto
+            project.tasks.push(projectTask)
+        }))
+
+        // atualizando o projeto com o array de tasks
+        await project.save()
+
+        return res.send({ project })
+    } catch (error) {
+        console.log(error)
+        res.status(400).send({ error: 'erro ao atualizar o projeto.' })
+    }
+},
+    
+
+
+    // insertOP: async function (req, res) {
+
+    //     const task = new Task(req.body)
+
+    //     try {
+    //         const saveTask = await task.save()
+    //         res.redirect('/user/list_ops')
+    //     } catch (error) {
+    //         res.status(400).send(error)
+    //     }
+    // },
+
 
     loadPedido: async function (req, res) {
 
         let id = req.params.id
         try {
-            let doc = await MateriaPrima.findById(id)
+            let doc = await Project.findById(id)
             res.render('../templates/edit_pedido', { error: false, body: doc })
         }
         catch (error) {
@@ -59,83 +116,89 @@ const userController = {
         }
     },
 
-    editPedido: async function (req, res) {
-        let editPedido = {}
+editPedido: async function (req, res) {
+    let editPedido = {}
 
-            editPedido.pedido = req.body.pedido,
-            editPedido.dtpedido = req.body.dtpedido,
-            editPedido.preventrega = req.body.preventrega,
-            editPedido.fornecedor = req.body.fornecedor,
-            editPedido.material = req.body.material,
-            editPedido.largura = req.body.largura,
-            editPedido.quantidade = req.body.quantidade,
-            editPedido.linear = req.body.linear,
-            editPedido.total = req.body.total
+        editPedido.pedido = req.body.pedido,
+        editPedido.dtpedido = req.body.dtpedido,
+        editPedido.preventrega = req.body.preventrega,
+        editPedido.fornecedor = req.body.fornecedor,
+        editPedido.material = req.body.material,
+        editPedido.largura = req.body.largura,
+        editPedido.quantidade = req.body.quantidade,
+        editPedido.linear = req.body.linear,
+        editPedido.total = req.body.total
 
-        let id = req.params.id
+    let id = req.params.id
 
-        if (!id) {
-            id = req.body.id
-        }
-        try {
-            let doc = await MateriaPrima.updateOne({ _id: id }, editPedido)
-            res.redirect('/user/list_pedidos')
-        } catch (error) {
-            res.status(400).send(error)
-        }
-    },
-    deletePedido: async function (req, res) {
-
-        let id = req.params.id
-
-        if (!id) {
-            id = req.body.id
-        }
-        try {
-            let doc = await MateriaPrima.findByIdAndDelete(id)
-            res.redirect('/user/list_pedidos')
-        }
-        catch (error) {
-            res.status(404).send(error)
-        }
-    },
-    deleteOP: async function (req, res) {
-
-        let id = req.params.id
-
-        if (!id) {
-            id = req.body.id
-        }
-        try {
-            let doc = await OrdemProducao.findByIdAndDelete(id)
-            res.redirect('/user/list_ops')
-        }
-        catch (error) {
-            res.status(404).send(error)
-        }
-    },
-
-    listPedidos: async function (req, res) {
-
-        try {
-            let materiaprima = await MateriaPrima.find({}).sort({ name: 1 })
-
-            res.render('../templates/list_pedidos', { listmps: materiaprima, error: false, body: {} })
-        } catch (error) {
-            res.status(404).send(error)
-        }
-    },
-
-    listOps: async function (req, res) {
-
-        try {
-            let docs = await OrdemProducao.find({}).sort({ name: 1 })
-
-            res.render('../templates/list_ops', { listops: docs, error: false, body: {} })
-        } catch (error) {
-            res.status(404).send(error)
-        }
+    if (!id) {
+        id = req.body.id
     }
+    try {
+        let doc = await Project.updateOne({ _id: id }, editPedido)
+        res.redirect('/user/list_pedidos')
+    } catch (error) {
+        res.status(400).send(error)
+    }
+},
+deletePedido: async function (req, res) {
+
+    let id = req.params.id
+
+    if (!id) {
+        id = req.body.id
+    }
+    try {
+        let doc = await Project.findByIdAndDelete(id)
+        res.redirect('/user/list_pedidos')
+    }
+    catch (error) {
+        res.status(404).send(error)
+    }
+},
+deleteOP: async function (req, res) {
+
+    let id = req.params.id
+
+    if (!id) {
+        id = req.body.id
+    }
+    try {
+        let doc = await Task.findByIdAndDelete(id)
+        res.redirect('/user/list_ops')
+    }
+    catch (error) {
+        res.status(404).send(error)
+    }
+},
+
+listPedidos: async function (req, res) {
+
+        try {
+            
+            const project = await Project.find({}).populate(['tasks'])
+
+
+           res.render('../templates/list_pedidos', { listmps: project, error: false, body: {} })
+           //return res.send({ project })
+
+        } catch (error) {
+            res.status(400).send({ error: 'erro ao carregar projeto.' })
+        }
+    },
+  
+
+
+listOps: async function (req, res) {
+
+    try {
+        let docs = await Task.find({}).sort({ name: 1 })
+
+        res.render('../templates/list_ops', { listops: docs, error: false, body: {} })
+    } catch (error) {
+        res.status(404).send(error)
+    }
+}
 
 }
 
