@@ -19,11 +19,8 @@ router.post('/edit/:id', userController.editPedido)
 router.delete('/delete/:id', userController.deletePedido)
 router.delete('/deleteop/:id', userController.deleteOP)
 
-//router.get('/insert_op', (req, res) => {res.render('../templates/insert_op')})
-
-router.put('/insert_op', userController.insertOP)
-
-
+router.get('/insert_op/:id', userController.loadOP)
+router.post('/insert_op/:projectId', userController.insertOP)
 
 router.post('/teste', userController.insertOP)
 

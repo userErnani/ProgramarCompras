@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/public/insert_pedido.css">
+    <link rel="stylesheet" href="">
     <title>Programar OPs</title>
 </head>
 
@@ -15,8 +15,44 @@
             <a class="btn-back-01" href="/user/list_pedidos">Voltar</a>
         </div>
         <header>
-            <form action="/user/insert_op" method="POST">
+
+            <form action="/user/insert_op/<%=body.id%>" method="POST">
+                <div class="materia prima">
+                    <div class="email">
+                        <input type="number" placeholder="Numero do Pedido" name="pedido" value=<%=body.pedido%> required>
+                    </div>
+                    <div class="email">
+                        <input type="date" placeholder="" name="dtpedido" value=<%=body.dtpedido%> required>
+                    </div>
+                    <div class="email">
+                        <input type="date" placeholder="Previsão Entrega" name="preventrega" value=<%=body.preventrega%>
+                        required>
+                    </div>
+                    <div class="email">
+                        <input type="text" placeholder="Fornecedor" name="fornecedor" value=<%=body.fornecedor%> required>
+                    </div>
+                    <div class="email">
+                        <input type="text" placeholder="Material" name="material" value=<%=body.material%> required>
+                    </div>
+                    <div class="email">
+                        <input type="number" placeholder="largura" name="largura" value=<%=body.largura%> required>
+                    </div>
+                    <div class="email">
+                        <input id="quantidade" type="number" placeholder="quantidade" name="quantidade"
+                            value=<%=body.quantidade%> required>
+                    <div class="email">
+                        <input id="linear" type="number" placeholder="Mts Linear" name="linear" value=<%=body.linear%> required>
+                    </div>
+                    <div class="email">
+                        <input id="total" type="number" placeholder="Qtd. Total" name="total" value=<%=body.total%>
+                        readonly>
+                    </div>
+                                        
+                    </div>                    
+                </div>
+
                 <div class="centro-miolo">
+
                     <h1>PROGRAMAR OPs</h1>
                     <div class="email">Numero da OP <br>
                         <input type="number" name="num_op" required>
@@ -43,6 +79,7 @@
                     <div class="botao">
                         <button> Salvar
                     </div>
+                </div>
             </form>
         </header>
     </div>

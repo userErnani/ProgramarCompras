@@ -9,15 +9,34 @@
     () Produtos      
        
        
-                   let insertOP = {}
+router.post('/:projectId', async (req, res) => {
 
-            insertOP.pedido = "",
-            insertOP.dtpedido = "",
-            insertOP.preventrega = "",
-            insertOP.fornecedor = "",
-            insertOP.material = "",
-            insertOP.largura = "",
-            insertOP.quantidade = "",
-            insertOP.linear = "",
-            insertOP.total = ""
+    try {
+        const { pedido, dtpedido,
+            preventrega, material, fornecedor,
+            largura, quantidade, linear, total, tasks } = req.body
 
+        console.log(req.params.projectId)
+
+        // alterando e recuperando projeto da coleção
+        const project = await Project.findByIdAndUpdate(req.params.projectId, {
+            pedido, dtpedido,
+            preventrega, material, fornecedor,
+            largura, quantidade, linear, total})
+
+
+        // criando tasks
+        await Promise.all(tasks.map(async task => {
+            const projectTask = new Task({ ...task, project: project._id })
+
+            // cadastrando na coleção de tasks 
+            await projectTask.save()
+
+            // inserindo no array do projeto
+            project.tasks.push(projectTask)
+        }))
+
+        // atualizando o projeto com o array de tasks
+        await project.save()
+
+        return res.send({ project })
