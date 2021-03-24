@@ -36,7 +36,7 @@
                         <td class="headline">quantidade</td>
                         <td class="headline">linear</td>
                         <td class="headline">total</td>
-                        <td class="headline-fim"></td>
+                  
                     </tr>
 
                     <div id='<%= listmps[i]._id%>'>
@@ -71,8 +71,7 @@
                                 </td>
                                 <td class="btnEdit"><a href="/user/edit/<%= listmps[i]._id%>">Editar</a>
                                 </td>
-                                <td class="btnExcluir"><button onclick=" return window.confirm('Confirme a exclusão')"
-                                        type="submit">Excluir</button></td>
+                                <td class="btnExcluir"><button onclick=" return window.confirm('Confirme a exclusão')" type="submit">Excluir</button></td>      
                             </tr>
 
                             <tr>
@@ -83,40 +82,50 @@
                                 <td class="headline-2">Observação</td>
                                 <td class="headline-2">Prev. Faturamento</td>
                                 <td class="headline-2">Disponivel</td>
+                                <td class="adic_op"><a href="/user/insert_op/<%= listmps[i]._id%>">+ OP</a>
+                                    <td class="btnEdit"><a href="/user/edit/<%= listops[i]._id%>">Editar</a>
+                                    </td>
+    
+
                                 <td class="btnExcluir"><button onclick=" return window.confirm('Confirme a exclusão')"
                                         type="submit">Excluir</button>
 
                             </tr>
+                            
                             <div class="header-op">
+                                <% for (let i=0; i < listops.length; i++)
+                                {%>
+                   
                                 <tr>
                                     <div class="line-op">
                                         <td class="headline">
-                                            <%= listmps[i].num_op%>
+                                            <%= listops[i].num_op%>
                                      </td>
                                         <td class="headline">
-                                            <%= listmps[i].cliente%>
+                                            <%= listops[i].cliente%>
                                       </td>
                                         <td class="headline">
-                                            <%= listmps[i].dt_ped_op%>
+                                            <%= listops[i].dt_ped_op%>
                                     </td>
                                         <td class="headline">
-                                            <%= listmps[i].prev_faturamento%>
+                                            <%= listops[i].prev_faturamento%>
                                         </td>
                                         <td class="headline">
-                                            <%= listmps[i].qtd_linear%>
+                                            <%= listops[i].qtd_linear%>
                                      </td>
                                         <td class="headline">
-                                            <%= listmps[i].obs_op%>
+                                            <%= listops[i].obs_op%>
                                      </td>
                                         <td class="headline">
-                                            <%= listmps[i].resultado%>
+                                            <%= listops[i].resultado%>
                                     </td>
-                                    <td class="adic_op"><a href="/user/insert_op/<%= listmps[i]._id%>">+ OP</a>
                                     </td>
     
                                     </div>
                                 </tr>
                             </div>
+                        <%}%>
+
                     </div>
 
                     </form>
