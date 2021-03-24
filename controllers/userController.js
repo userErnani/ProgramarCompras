@@ -1,3 +1,5 @@
+const project = require('../models/project')
+const { findById } = require('../models/project')
 const Project = require('../models/project')
 const Task = require('../models/task')
 
@@ -81,7 +83,7 @@ const userController = {
         }
     },
 
-    loadOP: async function (req, res) {
+    matprimaOP: async function (req, res) {
 
         let id = req.params.id
         try {
@@ -132,6 +134,47 @@ const userController = {
         }
     },
 
+    loadOP: async function (req, res) {
+
+        let id = req.params.id
+        try {
+            let doc = await Task.findById(id)
+            res.render('../templates/edit_op',
+                { error: false, body: doc })
+            //     res.send('passei aqui')
+        }
+        catch (error) {
+            res.status(404).send(error);
+        }
+    },
+
+    editOP: async function (req, res) {
+
+        let id = req.params.id
+
+        if (!id) {
+            id = req.body.id
+        }
+
+
+        let editOP = {}
+
+            editOP.num_op = req.body.num_op,
+            editOP.cliente = req.body.cliente,
+            editOP.dt_ped_op = req.body.dt_ped_op,
+            editOP.prev_faturamento = req.body.prev_faturamento,
+            editOP.qtd_linear = req.body.qtd_linear,
+            editOP.obs_op = req.body.obs_op,
+            editOP.resultado = req.body.resultado
+
+        try {
+            let doc = await Task.updateOne({ _id: id }, editOP)
+            res.redirect('/user/list_pedidos')
+        } catch (error) {
+            res.status(400).send(error)
+        }
+    },
+
     deletePedido: async function (req, res) {
 
         let id = req.params.id
@@ -149,6 +192,7 @@ const userController = {
     },
     deleteOP: async function (req, res) {
 
+
         let id = req.params.id
 
         if (!id) {
@@ -156,7 +200,8 @@ const userController = {
         }
         try {
             let doc = await Task.findByIdAndDelete(id)
-            res.redirect('/user/list_ops')
+            console.log(id);
+            res.redirect('/user/list_pedidos')
         }
         catch (error) {
             res.status(404).send(error)
@@ -171,25 +216,13 @@ const userController = {
 
             const tasks = await Task.find({})
 
-            res.render('../templates/list_pedidos', { listmps: project, listops: tasks, error: false, body: {} })
+            res.render('../templates/list_pedidos', { listmps: project, listops: tasks })
             // res.send({project})
 
         } catch (error) {
             res.status(400).send({ error: 'erro ao carregar projeto.' })
         }
     },
-
-    listOps: async function (req, res) {
-
-        try {
-            let docs = await Task.find({}).sort({ name: 1 })
-
-            res.render('../templates/list_ops', { listops: docs, error: false, body: {} })
-        } catch (error) {
-            res.status(404).send(error)
-        }
-    }
-
 }
 
 module.exports = userController

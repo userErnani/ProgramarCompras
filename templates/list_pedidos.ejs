@@ -40,7 +40,7 @@
                     </tr>
 
                     <div id='<%= listmps[i]._id%>'>
-                        <form method="POST" action="/user/delete/<%= listmps[i]._id%>/?_method=DELETE">
+                        <form method="POST" action="/user/deletemp/<%= listmps[i]._id%>/?_method=DELETE">
                             <tr>
                                 <td class="headline">
                                     <%= listmps[i].pedido%>
@@ -83,46 +83,45 @@
                                 <td class="headline-2">Prev. Faturamento</td>
                                 <td class="headline-2">Disponivel</td>
                                 <td class="adic_op"><a href="/user/insert_op/<%= listmps[i]._id%>">+ OP</a>
-                                    <td class="btnEdit"><a href="/user/edit/<%= listops[i]._id%>">Editar</a>
-                                    </td>
-    
-
-                                <td class="btnExcluir"><button onclick=" return window.confirm('Confirme a exclusão')"
-                                        type="submit">Excluir</button>
 
                             </tr>
                             
                             <div class="header-op">
                                 <% for (let i=0; i < listops.length; i++)
                                 {%>
-                   
+                            <form method="POST" action="/user/deleteop/<%= listops[i]._id%>/?_method=DELETE">
+
                                 <tr>
                                     <div class="line-op">
                                         <td class="headline">
                                             <%= listops[i].num_op%>
-                                     </td>
+                                        </td>
                                         <td class="headline">
                                             <%= listops[i].cliente%>
-                                      </td>
+                                        </td>
                                         <td class="headline">
                                             <%= listops[i].dt_ped_op%>
-                                    </td>
+                                        </td>
                                         <td class="headline">
                                             <%= listops[i].prev_faturamento%>
                                         </td>
                                         <td class="headline">
                                             <%= listops[i].qtd_linear%>
-                                     </td>
+                                        </td>
                                         <td class="headline">
                                             <%= listops[i].obs_op%>
-                                     </td>
+                                        </td>
                                         <td class="headline">
                                             <%= listops[i].resultado%>
-                                    </td>
-                                    </td>
+                                        </td>
+                                        <td class="btnEdit"><a href="/user/editop/<%= listops[i]._id%>">Editar</a>
+                                        </td>        
+                                        <td class="btnExcluir"><button onclick=" return window.confirm('Confirme a exclusão')"
+                                        type="submit">Excluir</button></td>
     
                                     </div>
                                 </tr>
+                            </form>
                             </div>
                         <%}%>
 

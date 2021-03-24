@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Cadastro MP</title>
+    <title>Editar OP</title>
     <link rel="stylesheet" href="/public/insert_pedido.css">
 </head>
 
@@ -14,39 +14,32 @@
         <a class="btn-back-01" href="/user/list_pedidos">Voltar</a>
     </div>
     <div class="miolo">
-        <form action="/user/edit/<%=body.id%>" method="POST">
+        <form action="/user/editop/<%=body.id%>" method="POST">
             <div class="centro-miolo">
-                <h1>Alterar os dados do Pedido</h1>
+                <h1>Alterar os dados da OP</h1>
 
                 <div class="email">
-                    <input type="number" placeholder="Numero do Pedido" name="pedido" value=<%=body.pedido%> required>
+                    <input type="number" placeholder="Numero da OP" name="num_op" value=<%=body.num_op%> required>
                 </div>
                 <div class="email">
-                    <input type="date" placeholder="" name="dtpedido" value=<%=body.dtpedido%> required>
+                    <input type="text" placeholder="Nome do Cliente" name="cliente" value=<%=body.cliente%> required>
                 </div>
                 <div class="email">
-                    <input type="date" placeholder="Previsão Entrega" name="preventrega" value=<%=body.preventrega%>
-                    required>
+                    <input type="date" placeholder="Data Pedido" name="dt_ped_op" value=<%=body.dt_ped_op%> required>
                 </div>
                 <div class="email">
-                    <input type="text" placeholder="Fornecedor" name="fornecedor" value=<%=body.fornecedor%> required>
+                    <input type="date" placeholder="Previsão Faturamento " name="prev_faturamento" value=<%=body.prev_faturamento%> required>
                 </div>
                 <div class="email">
-                    <input type="text" placeholder="Material" name="material" value=<%=body.material%> required>
+                    <input type="number" placeholder="Quantidade Linear" name="qtd_linear" value=<%=body.qtd_linear%> required>
                 </div>
                 <div class="email">
-                    <input type="number" placeholder="largura" name="largura" value=<%=body.largura%> required>
+                    <input type="text" placeholder="Observação" name="obs_op" value=<%=body.obs_op%>>
                 </div>
                 <div class="email">
-                    <input id="quantidade" type="number" placeholder="quantidade" name="quantidade" value=<%=body.quantidade%> required>
+                    <input  type="number" placeholder="Sobra" name="resultado" value=<%=body.resultado%> readonly>
                 </div>
                 <div class="email">
-                    <input id="linear" type="number" placeholder="Mts Linear" name="linear" value=<%=body.linear%> required>
-                </div>
-                <div class="email">
-                    <input id="total" type="number" placeholder="Qtd. Total" name="total" value=<%=body.total%>
-                    readonly>
-                </div>
                 <div class="botao" onclick="total()">
                     <button> Salvar
                 </div>
@@ -61,7 +54,7 @@
         <%}%>
             </div>
 
-            <script>
+            <!-- <script>
                 function total() {
                     let quantidade = document.getElementById('quantidade').value
                     let linear = document.getElementById('linear').value
@@ -69,6 +62,6 @@
                     document.getElementById("total").value = res
                 }
             </script>
-</body>
+</body> -->
 
 </html>
