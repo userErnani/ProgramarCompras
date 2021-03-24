@@ -163,14 +163,14 @@ listPedidos: async function (req, res) {
             
             const project = await Project.find({})
 
-            const tasks = await Task.find({})
+            const tasksProject = await Project.find(    
+                { project : { $elemMatch: ({}) }})
                   //.populate(['tasks']))
 
+            console.log(project);
+        //   res.render('../templates/list_pedidos', { listmps: project, error: false, body: {} })  
 
-        //   console.log(project, tasks);
-           res.render('../templates/list_pedidos', { listmps: project, listops:tasks, error: false, body: {} })  
-
-        //    res.send({project})
+            res.send({project})
  
         } catch (error) {
             res.status(400).send({ error: 'erro ao carregar projeto.' })

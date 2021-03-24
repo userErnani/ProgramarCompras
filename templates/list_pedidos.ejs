@@ -23,8 +23,7 @@
     <div class="header">
         <thead>
         <tbody>
-            <%                 
-                for (let i=0; i < listmps.length; i++)
+            <% for (let i=0; i < listmps.length; i++)
              {%>
                 <table id="tabela">
                     <tr class="line-title">
@@ -88,44 +87,37 @@
                                         type="submit">Excluir</button>
 
                             </tr>
-
-                            <% 
-                            for (let i=0; i < listops.length; i++)
-                            {%>
-
                             <div class="header-op">
-                                
                                 <tr>
                                     <div class="line-op">
                                         <td class="headline">
-                                            <%= listops[i].num_op%>
+                                            <%= listmps[i].num_op%>
                                      </td>
                                         <td class="headline">
-                                            <%= listops[i].cliente%>
+                                            <%= listmps[i].cliente%>
                                       </td>
                                         <td class="headline">
-                                            <%= listops[i].dt_ped_op%>
+                                            <%= listmps[i].dt_ped_op%>
                                     </td>
                                         <td class="headline">
-                                            <%= listops[i].prev_faturamento%>
+                                            <%= listmps[i].prev_faturamento%>
                                         </td>
                                         <td class="headline">
-                                            <%= listops[i].qtd_linear%>
+                                            <%= listmps[i].qtd_linear%>
                                      </td>
                                         <td class="headline">
-                                            <%= listops[i].obs_op%>
+                                            <%= listmps[i].obs_op%>
                                      </td>
                                         <td class="headline">
-                                            <%= listops[i].resultado%>
+                                            <%= listmps[i].resultado%>
                                     </td>
-                                    <td class="adic_op"><a href="/user/insert_op/<%= listops[i]._id%>">+ OP</a>
+                                    <td class="adic_op"><a href="/user/insert_op/<%= listmps[i]._id%>">+ OP</a>
                                     </td>
     
                                     </div>
                                 </tr>
                             </div>
-                            <%}%>
-                        </div>
+                    </div>
 
                     </form>
                     <%}%>
