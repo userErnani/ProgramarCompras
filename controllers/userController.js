@@ -1,5 +1,3 @@
-const project = require('../models/project')
-const { findById } = require('../models/project')
 const Project = require('../models/project')
 const Task = require('../models/task')
 
@@ -159,7 +157,7 @@ const userController = {
 
         let editOP = {}
 
-            editOP.num_op = req.body.num_op,
+        editOP.num_op = req.body.num_op,
             editOP.cliente = req.body.cliente,
             editOP.dt_ped_op = req.body.dt_ped_op,
             editOP.prev_faturamento = req.body.prev_faturamento,
@@ -200,7 +198,6 @@ const userController = {
         }
         try {
             let doc = await Task.findByIdAndDelete(id)
-            console.log(id);
             res.redirect('/user/list_pedidos')
         }
         catch (error) {
@@ -226,5 +223,4 @@ const userController = {
 }
 
 module.exports = userController
-
 

@@ -23,8 +23,7 @@
     <div class="header">
         <thead>
         <tbody>
-            <% for (let i=0; i < listmps.length; i++)
-             {%>
+            <% for (let i=0; i < listmps.length; i++) {%>
                 <table id="tabela">
                     <tr class="line-title">
                         <td class="headline">Pedido</td>
@@ -36,7 +35,7 @@
                         <td class="headline">quantidade</td>
                         <td class="headline">linear</td>
                         <td class="headline">total</td>
-                  
+
                     </tr>
 
                     <div id='<%= listmps[i]._id%>'>
@@ -71,7 +70,8 @@
                                 </td>
                                 <td class="btnEdit"><a href="/user/edit/<%= listmps[i]._id%>">Editar</a>
                                 </td>
-                                <td class="btnExcluir"><button onclick=" return window.confirm('Confirme a exclusão')" type="submit">Excluir</button></td>      
+                                <td class="btnExcluir"><button onclick=" return window.confirm('Confirme a exclusão')"
+                                        type="submit">Excluir</button></td>
                             </tr>
 
                             <tr>
@@ -82,48 +82,49 @@
                                 <td class="headline-2">Observação</td>
                                 <td class="headline-2">Prev. Faturamento</td>
                                 <td class="headline-2">Disponivel</td>
-                                <td class="adic_op"><a href="/user/insert_op/<%= listmps[i]._id%>">+ OP</a>
+                                <td class="adic_op"><a href="/user/insert_op/<%= listmps[i]._id%>">NOVA OP</a>
 
                             </tr>
-                            
-                            <div class="header-op">
-                                <% for (let i=0; i < listops.length; i++)
-                                {%>
-                            <form method="POST" action="/user/deleteop/<%= listops[i]._id%>/?_method=DELETE">
 
-                                <tr>
-                                    <div class="line-op">
-                                        <td class="headline">
-                                            <%= listops[i].num_op%>
-                                        </td>
-                                        <td class="headline">
-                                            <%= listops[i].cliente%>
-                                        </td>
-                                        <td class="headline">
-                                            <%= listops[i].dt_ped_op%>
-                                        </td>
-                                        <td class="headline">
-                                            <%= listops[i].prev_faturamento%>
-                                        </td>
-                                        <td class="headline">
-                                            <%= listops[i].qtd_linear%>
-                                        </td>
-                                        <td class="headline">
-                                            <%= listops[i].obs_op%>
-                                        </td>
-                                        <td class="headline">
-                                            <%= listops[i].resultado%>
-                                        </td>
-                                        <td class="btnEdit"><a href="/user/editop/<%= listops[i]._id%>">Editar</a>
-                                        </td>        
-                                        <td class="btnExcluir"><button onclick=" return window.confirm('Confirme a exclusão')"
-                                        type="submit">Excluir</button></td>
-    
-                                    </div>
-                                </tr>
-                            </form>
+                            <div class="header-op">
+                                <% for (let i=0; i < listops.length; i++) {%>
+                                    <form method="POST" action="/user/deleteop/<%= listops[i]._id%>/?_method=DELETE">
+
+                                        <tr>
+                                            <div class="line-op">
+                                                <td class="headline">
+                                                    <%= listops[i].num_op%>
+                                                </td>
+                                                <td class="headline">
+                                                    <%= listops[i].cliente%>
+                                                </td>
+                                                <td class="headline">
+                                                    <%= listops[i].dt_ped_op%>
+                                                </td>
+                                                <td class="headline">
+                                                    <%= listops[i].prev_faturamento%>
+                                                </td>
+                                                <td class="headline">
+                                                    <%= listops[i].qtd_linear%>
+                                                </td>
+                                                <td class="headline">
+                                                    <%= listops[i].obs_op%>
+                                                </td>
+                                                <td class="headline">
+                                                    <%= listops[i].resultado%>
+                                                </td>
+                                                <td class="btnEdit"><a
+                                                        href="/user/editop/<%= listops[i]._id%>">Editar</a>
+                                                </td>
+                                                <td class="btnExcluir"><button
+                                                        onclick=" return window.confirm('Confirme a exclusão')"
+                                                        type="submit">Excluir</button></td>
+
+                                            </div>
+                                        </tr>
+                                    </form>
                             </div>
-                        <%}%>
+                            <%}%>
 
                     </div>
 
