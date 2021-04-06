@@ -1,2 +1,2 @@
-# ProgramarCompras
- Programar Compras Com as OPS
+# ProgramarOPs
+ Refazer o programa usando uma unica coleção no MongoDB

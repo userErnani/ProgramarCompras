@@ -14,8 +14,8 @@ router.post('/insert_pedido', userController.insertPedido)
 router.get('/insert_op/:id', userController.matprimaOP)
 router.post('/insert_op/:projectId', userController.insertOP)
 
-router.get('/edit/:id', userController.loadPedido)
-router.post('/edit/:id', userController.editPedido)
+router.get('/editped/:id', userController.loadPedido)
+router.post('/editped/:id', userController.editPedido)
 
 router.get('/editop/:id', userController.loadOP)
 router.post('/editop/:id', userController.editOP)

@@ -98,7 +98,7 @@ const userController = {
     editPedido: async function (req, res) {
         let editPedido = {}
 
-        editPedido.pedido = req.body.pedido,
+            editPedido.pedido = req.body.pedido,
             editPedido.dtpedido = req.body.dtpedido,
             editPedido.preventrega = req.body.preventrega,
             editPedido.fornecedor = req.body.fornecedor,
