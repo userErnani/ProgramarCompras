@@ -18,11 +18,11 @@ const userController = {
                 largura, quantidade, linear, total
             })
 
-            let tasks = [{
-                "num_op": "", "cliente": "", "dt_ped_op": "",
-                "prev_faturamento": "", "qtd_linear": "", "obs_op": "",
-                "resultado": ""
-            }]
+            let tasks = [{}]
+            //     "num_op": "", "cliente": "", "dt_ped_op": "",
+            //     "prev_faturamento": "", "qtd_linear": "", "obs_op": "",
+            //     "resultado": ""
+            // }]
 
             // criando tasks
             await Promise.all(tasks.map(async task => {
@@ -57,7 +57,7 @@ const userController = {
 
             // criando tasks
             const task = [{}]
-            task.num_op = req.body.num_op,
+                task.num_op = req.body.num_op,
                 task.cliente = req.body.cliente,
                 task.dt_ped_op = req.body.dt_ped_op,
                 task.prev_faturamento = req.body.prev_faturamento,
@@ -150,14 +150,11 @@ const userController = {
 
         let id = req.params.id
 
-        if (!id) {
-            id = req.body.id
-        }
-
+        if (!id) {id = req.body.id }
 
         let editOP = {}
 
-        editOP.num_op = req.body.num_op,
+            editOP.num_op = req.body.num_op,
             editOP.cliente = req.body.cliente,
             editOP.dt_ped_op = req.body.dt_ped_op,
             editOP.prev_faturamento = req.body.prev_faturamento,
@@ -168,6 +165,7 @@ const userController = {
         try {
             let doc = await Task.updateOne({ _id: id }, editOP)
             res.redirect('/user/list_pedidos')
+            console.log(id);
         } catch (error) {
             res.status(400).send(error)
         }
@@ -191,10 +189,10 @@ const userController = {
     deleteOP: async function (req, res) {
 
 
-        let id = req.params.id
+        let id = req.params.projectId
 
         if (!id) {
-            id = req.body.id
+            id = req.body.projectId
         }
         try {
             let doc = await Task.findByIdAndDelete(id)
@@ -209,12 +207,21 @@ const userController = {
 
         try {
 
-            const project = await Project.find({})
+            const project = await Project.find( {  "pedido": "2" 
+                                               // { $all : ["cliente", "num_op"] } }
+                                             } ) 
+                                                  
+            const idProject = await Project.find({"tasks": "606cb87657da2333c0ed619a"})                                          
 
-            const tasks = await Task.find({})
 
-            res.render('../templates/list_pedidos', { listmps: project, listops: tasks })
-            // res.send({project})
+            const tasks = await Task.find({ "cliente": "TESTE"  
+                                            })
+
+            //const tasks = await Task.find({})
+
+           // res.render('../templates/list_pedidos', { listmps: project, listops: tasks })
+            //res.send({projectTask})
+            console.log(project, tasks, idProject);
 
         } catch (error) {
             res.status(400).send({ error: 'erro ao carregar projeto.' })

@@ -21,7 +21,7 @@ router.get('/editop/:id', userController.loadOP)
 router.post('/editop/:id', userController.editOP)
 
 router.delete('/deletemp/:id', userController.deletePedido)
-router.delete('/deleteop/:id', userController.deleteOP)
+router.delete('/deleteop/:projectId', userController.deleteOP)
 
 
 router.post('/teste', userController.insertOP)
