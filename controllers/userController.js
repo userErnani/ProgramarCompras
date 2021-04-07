@@ -76,7 +76,6 @@ const userController = {
             res.redirect('/user/list_pedidos')
             //        return res.send({ project })
         } catch (error) {
-            console.log(error)
             res.status(400).send({ error: 'erro ao atualizar o projeto.' })
         }
     },
@@ -165,7 +164,6 @@ const userController = {
         try {
             let doc = await Task.updateOne({ _id: id }, editOP)
             res.redirect('/user/list_pedidos')
-            console.log(id);
         } catch (error) {
             res.status(400).send(error)
         }
@@ -204,24 +202,12 @@ const userController = {
     },
 
     listPedidos: async function (req, res) {
-
         try {
+            const project = await Project.find({ })
+            const tasks = await Task.find({ })
+            res.render('../templates/list_pedidos', { listmps: project, listops: tasks })
 
-            const project = await Project.find( {  "pedido": "2" 
-                                               // { $all : ["cliente", "num_op"] } }
-                                             } ) 
-                                                  
-            const idProject = await Project.find({"tasks": "606cb87657da2333c0ed619a"})                                          
-
-
-            const tasks = await Task.find({ "cliente": "TESTE"  
-                                            })
-
-            //const tasks = await Task.find({})
-
-           // res.render('../templates/list_pedidos', { listmps: project, listops: tasks })
             //res.send({projectTask})
-            console.log(project, tasks, idProject);
 
         } catch (error) {
             res.status(400).send({ error: 'erro ao carregar projeto.' })

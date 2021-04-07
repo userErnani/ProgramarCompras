@@ -11,8 +11,6 @@ const ProjectSchema = new mongoose.Schema({
     quantidade: {type: Number, required: true, maxlength: 3},
     linear: {type: Number, required: true, maxlength: 6},
     total: {type: Number, maxlength: 6},
-
-
     tasks: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Task'

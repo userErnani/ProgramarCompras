@@ -9,12 +9,10 @@ const TaskSchema = new mongoose.Schema({
     qtd_linear: {type: String, maxlength: 5},
     obs_op: {type: String, maxlength: 30},
     disponivel: {type: String},
-
     project: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Project',
-        required: true 
-    }
+        required: true }
 })
 
 module.exports = mongoose.model('Task', TaskSchema)
