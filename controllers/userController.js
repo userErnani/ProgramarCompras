@@ -18,12 +18,7 @@ const userController = {
                 largura, quantidade, linear, total
             })
 
-            let tasks = [{}]
-            //     "num_op": "", "cliente": "", "dt_ped_op": "",
-            //     "prev_faturamento": "", "qtd_linear": "", "obs_op": "",
-            //     "resultado": ""
-            // }]
-
+            let tasks = []
             // criando tasks
             await Promise.all(tasks.map(async task => {
                 const projectTask = new Task({ ...task, project: project._id })
@@ -56,7 +51,7 @@ const userController = {
             }, { new: true })
 
             // criando tasks
-            const task = [{}]
+            const task = []
                 task.num_op = req.body.num_op,
                 task.cliente = req.body.cliente,
                 task.dt_ped_op = req.body.dt_ped_op,
@@ -138,7 +133,6 @@ const userController = {
             let doc = await Task.findById(id)
             res.render('../templates/edit_op',
                 { error: false, body: doc })
-            //     res.send('passei aqui')
         }
         catch (error) {
             res.status(404).send(error);
@@ -177,8 +171,8 @@ const userController = {
             id = req.body.id
         }
         try {
-            let doc = await Project.findByIdAndDelete(id)
-            res.redirect('/user/list_pedidos')
+           await Project.findByIdAndDelete(id)
+           res.redirect('/user/list_pedidos')
         }
         catch (error) {
             res.status(404).send(error)
@@ -186,14 +180,12 @@ const userController = {
     },
     deleteOP: async function (req, res) {
 
+        let id = req.params.id
 
-        let id = req.params.projectId
+        if (!id) {id = req.body.id }
 
-        if (!id) {
-            id = req.body.projectId
-        }
         try {
-            let doc = await Task.findByIdAndDelete(id)
+            await Task.findByIdAndDelete(id)
             res.redirect('/user/list_pedidos')
         }
         catch (error) {
@@ -203,11 +195,11 @@ const userController = {
 
     listPedidos: async function (req, res) {
         try {
-            const project = await Project.find({ })
+            const project = await Project.find().populate('Project')
             const tasks = await Task.find({ })
             res.render('../templates/list_pedidos', { listmps: project, listops: tasks })
 
-            //res.send({projectTask})
+            //res.send({project})
 
         } catch (error) {
             res.status(400).send({ error: 'erro ao carregar projeto.' })

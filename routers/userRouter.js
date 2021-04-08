@@ -7,7 +7,6 @@ router.get('/home', (req, res) => {res.render('../templates/home')})
 
 router.get('/list_pedidos', userController.listPedidos)
 
-
 router.get('/insert_pedido', (req, res) => {res.render('../templates/insert_pedido')})
 router.post('/insert_pedido', userController.insertPedido)
 
@@ -21,8 +20,7 @@ router.get('/editop/:id', userController.loadOP)
 router.post('/editop/:id', userController.editOP)
 
 router.delete('/deletemp/:id', userController.deletePedido)
-router.delete('/deleteop/:projectId', userController.deleteOP)
-
+router.get('/deleteop/:id', userController.deleteOP)
 
 router.post('/teste', userController.insertOP)
 
