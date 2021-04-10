@@ -8,51 +8,59 @@ const userController = {
 
         try {
             const { pedido, dtpedido,
-                preventrega, material, fornecedor,
-                largura, quantidade, linear, total } = req.body
-
+                preventrega, fornecedor, material,
+                largura, quantidade, linear, total, tasks } = req.body
+    
             // cadastrando e recuperando projeto da coleção
-            const project = await Project.create({
+            const project = await Project.create({ 
                 pedido, dtpedido,
-                preventrega, material, fornecedor,
-                largura, quantidade, linear, total
-            })
-
-            let tasks = []
+                preventrega, fornecedor, material,
+                largura, quantidade, linear, total })
+    
             // criando tasks
-            await Promise.all(tasks.map(async task => {
-                const projectTask = new Task({ ...task, project: project._id })
-                // cadastrando na coleção de tasks 
-                await projectTask.save()
-                // inserindo no array do projeto
-                project.tasks.push(projectTask)
-            }))
+            // const task = []
+
+            // await Promise.all(tasks.map(async task => {
+            //     const projectTask = new Task({ ...task, project: project._id })
+    
+            //     // cadastrando na coleção de tasks 
+            //     await projectTask.save()
+    
+            //     // inserindo no array do projeto
+            //     project.tasks.push(projectTask)
+            // }))
+    
             // atualizando o projeto com o array de tasks
             await project.save()
-            res.redirect('/user/list_pedidos')
-            // return res.send({ project })
+    
+            res.redirect('/user/list_pedidos') 
+             //return res.send({ project })
+
         } catch (error) {
+    
             res.status(400).send({ error: 'erro ao criar o projeto.' })
         }
     },
 
     insertOP: async function (req, res) {
 
+        let id = req.body.id
+        projectId = id
+
         try {
             const { pedido, dtpedido,
-                preventrega, material, fornecedor,
-                largura, quantidade, linear, total } = req.body
+                preventrega, fornecedor, material,
+                largura, quantidade, linear, total, tasks } = req.body
 
             // alterando e recuperando projeto da coleção
-            const project = await Project.findByIdAndUpdate(req.params.projectId, {
+            const project = await Project.findByIdAndUpdate(projectId, {
                 pedido, dtpedido,
-                preventrega, material, fornecedor,
+                preventrega, fornecedor, material,
                 largura, quantidade, linear, total
             }, { new: true })
 
-            // criando tasks
             const task = []
-                task.num_op = req.body.num_op,
+            task.num_op = req.body.num_op,
                 task.cliente = req.body.cliente,
                 task.dt_ped_op = req.body.dt_ped_op,
                 task.prev_faturamento = req.body.prev_faturamento,
@@ -60,31 +68,31 @@ const userController = {
                 task.obs_op = req.body.obs_op,
                 task.resultado = req.body.resultado
 
-            const projectTask = new Task({ ...task, project: project._id })
-
+            const projectTask = await new Task({ ...task, project: project._id })
             // cadastrando na coleção de tasks 
             await projectTask.save()
-
+            // inserindo no array do projeto
+            project.tasks.push(projectTask)
             // atualizando o projeto com o array de tasks
             await project.save()
 
-            res.redirect('/user/list_pedidos')
-            //        return res.send({ project })
+            res.redirect('/user/list_pedidos') 
+
+            //return res.send({ project })
         } catch (error) {
             res.status(400).send({ error: 'erro ao atualizar o projeto.' })
         }
     },
 
-    matprimaOP: async function (req, res) {
+    loadInsertOP: async function (req, res) {
 
-        let id = req.params.id
+        let id = req.params.projectId
+
         try {
             let doc = await Project.findById(id)
             res.render('../templates/insert_op',
                 { error: false, body: doc })
-            //     res.send('passei aqui')
-        }
-        catch (error) {
+        }catch (error) {
             res.status(404).send(error);
         }
     },
@@ -128,8 +136,9 @@ const userController = {
 
     loadOP: async function (req, res) {
 
-        let id = req.params.id
+        let id = req.params.projectId
         try {
+            
             let doc = await Task.findById(id)
             res.render('../templates/edit_op',
                 { error: false, body: doc })
@@ -195,11 +204,13 @@ const userController = {
 
     listPedidos: async function (req, res) {
         try {
-            const project = await Project.find().populate('Project')
-            const tasks = await Task.find({ })
-            res.render('../templates/list_pedidos', { listmps: project, listops: tasks })
 
-            //res.send({project})
+            const project = await Project.find().populate(['tasks'])
+
+            res.render('../templates/list_pedidos', { listmps: project })
+
+
+        //return res.send({project})
 
         } catch (error) {
             res.status(400).send({ error: 'erro ao carregar projeto.' })

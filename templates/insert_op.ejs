@@ -15,9 +15,11 @@
             <a class="btn-back-01" href="/user/list_pedidos">Voltar</a>
         </div>
         <header>
-
-            <form action="/user/insert_op/<%=body.id%>" method="POST">
-                <div class="materia prima">
+            <form action="/user/insert_op/<%=body.projectId%>" method="POST">
+                <div class="email">
+                    <div class="email">
+                        <input type="text" placeholder="Numero do Id" name="id" value=<%=body.id%> readonly>
+                    </div>
                     <div class="email">
                         <input type="number" placeholder="Numero do Pedido" name="pedido" value=<%=body.pedido%> required>
                     </div>
@@ -52,7 +54,7 @@
                 </div>
 
                 <div class="centro-miolo">
-
+                    
                     <h1>PROGRAMAR OPs</h1>
                     <div class="email">Numero da OP <br>
                         <input type="number" name="num_op" required>

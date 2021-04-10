@@ -8,7 +8,7 @@ const TaskSchema = new mongoose.Schema({
     prev_faturamento: {type: String, },
     qtd_linear: {type: String, maxlength: 5},
     obs_op: {type: String, maxlength: 30},
-    disponivel: {type: String},
+    resultado: {type: String},
     project: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Project',
