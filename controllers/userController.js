@@ -61,12 +61,12 @@ const userController = {
 
             const task = []
             task.num_op = req.body.num_op,
-                task.cliente = req.body.cliente,
-                task.dt_ped_op = req.body.dt_ped_op,
-                task.prev_faturamento = req.body.prev_faturamento,
-                task.qtd_linear = req.body.qtd_linear,
-                task.obs_op = req.body.obs_op,
-                task.resultado = req.body.resultado
+            task.cliente = req.body.cliente,
+            task.dt_ped_op = req.body.dt_ped_op,
+            task.prev_faturamento = req.body.prev_faturamento,
+            task.qtd_linear = req.body.qtd_linear,
+            task.obs_op = req.body.obs_op,
+            task.resultado = req.body.resultado
 
             const projectTask = await new Task({ ...task, project: project._id })
             // cadastrando na coleção de tasks 
@@ -205,12 +205,12 @@ const userController = {
     listPedidos: async function (req, res) {
         try {
 
-            const project = await Project.find().populate(['tasks'])
+            const project = await Project.find().populate('tasks')                     
 
-            res.render('../templates/list_pedidos', { listmps: project })
+           // res.render('../templates/list_pedidos', { listmps: project })
+            console.log({project});
 
-
-        //return res.send({project})
+            return res.send({project})
 
         } catch (error) {
             res.status(400).send({ error: 'erro ao carregar projeto.' })

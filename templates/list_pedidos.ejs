@@ -23,112 +23,72 @@
     <div class="header">
         <thead>
         <tbody>
-            <% for (let i=0; i < listmps.length; i++)
-             {%>
-                <table id="tabela">
-                        <tr class="line-title">
-                        <td class="headline">Pedido</td>
-                        <td class="headline">Data Pedido</td>
-                        <td class="headline">Prev. Entrega</td>
-                        <td class="headline">Fornecedor</td>
-                        <td class="headline">Material</td>
-                        <td class="headline">largura</td>
-                        <td class="headline">quantidade</td>
-                        <td class="headline">linear</td>
-                        <td class="headline">total</td>
-                  
-                        </tr>
+        <% for (let i=0; i < listmps.length; i++)
+            {%>
+            <table id="tabela">
+            <tr class="line-title">
+                <td class="headline">Pedido</td>
+                <td class="headline">Data Pedido</td>
+                <td class="headline">Prev. Entrega</td>
+                <td class="headline">Fornecedor</td>
+                <td class="headline">Material</td>
+                <td class="headline">largura</td>
+                <td class="headline">quantidade</td>
+                <td class="headline">linear</td>
+                <td class="headline">total</td>
+            </tr>
 
-                        <div id='<%= listmps[i]._id%>'>
-                            <form method="POST" action="/user/delete_mp/<%= listmps[i]._id%>/?_method=DELETE">
-                            <tr>
-                                <td class="headline">
-                                    <%= listmps[i].pedido%>
-                                </td>
-                                <td class="headline">
-                                    <%= listmps[i].dtpedido%>
-                                </td>
-                                <td class="headline">
-                                    <%= listmps[i].preventrega%>
-                                </td>
-                                <td class="headline">
-                                    <%= listmps[i].fornecedor%>
-                                </td>
-                                <td class="headline">
-                                    <%= listmps[i].material%>
-                                </td>
-                                <td class="headline">
-                                    <%= listmps[i].largura%>
-                                </td>
-                                <td class="headline">
-                                    <%= listmps[i].quantidade%>
-                                </td>
-                                <td class="headline">
-                                    <%= listmps[i].linear%>
-                                </td>
-                                <td class="headline">
-                                    <%= listmps[i].total%>
-                                </td>
-                                <td class="btnEdit"><a href="/user/edit_ped/<%= listmps[i]._id%>">Editar</a>
-                                </td>
-                                <td class="btnExcluir"><button onclick=" return window.confirm('Confirme a exclusão')" type="submit">Excluir</button></td>      
-                            </tr>
+        <div id='<%= listmps[i]._id%>'>
+            <form method="POST" action="/user/delete_mp/<%= listmps[i]._id%>/?_method=DELETE">
+            <tr>
+                <td class="headline"><%= listmps[i].pedido%></td>
+                <td class="headline">
+                    <%= listmps[i].dtpedido%></td>
+                <td class="headline"><%= listmps[i].preventrega%></td>
+                <td class="headline"><%= listmps[i].fornecedor%></td>
+                <td class="headline"><%= listmps[i].material%></td>
+                <td class="headline"><%= listmps[i].largura%></td>
+                <td class="headline"><%= listmps[i].quantidade%></td>
+                <td class="headline"><%= listmps[i].linear%></td>
+                <td class="headline"><%= listmps[i].total%></td>
+                <td class="btnEdit"><a href="/user/edit_ped/<%= listmps[i]._id%>">Editar</a></td>
+                <td class="btnExcluir"><button onclick=" return window.confirm('Confirme a exclusão')" type="submit">Excluir</button></td>      
+            </tr>
 
-                            <tr>
-                                <td class="headline-2">Num. da OP</td>
-                                <td class="headline-2">Data Pedido</td>
-                                <td class="headline-2">Cliente</td>
-                                <td class="headline-2">Qtd. Linear</td>
-                                <td class="headline-2">Observação</td>
-                                <td class="headline-2">Prev. Faturamento</td>
-                                <td class="headline-2">Disponivel</td>
-                                <td class="adic_op"><a href="/user/insert_op/<%= listmps[i]._id%>">Adicionar OP</a>
-                            </tr>
+            <tr>
+                <td class="headline-2">Num. da OP</td>
+                <td class="headline-2">Data Pedido</td>
+                <td class="headline-2">Cliente</td>
+                <td class="headline-2">Qtd. Linear</td>
+                <td class="headline-2">Observação</td>
+                <td class="headline-2">Prev. Faturamento</td>
+                <td class="headline-2">Disponivel</td>
+                <td class="adic_op"><a href="/user/insert_op/<%= listmps[i]._id%>">Adicionar OP</a>
+            </tr>
 
+        <div class="header-op">
 
+            <tr>
+                <div class="line-op">
+                <td class="headline"><%= listmps[i].num_op%></td>
+                    <td class="headline"><%= listmps[i].cliente%></td>
+                    <td class="headline"><%= listmps[i].dt_ped_op%></td>
+                    <td class="headline"><%= listmps[i].prev_faturamento%></td>
+                    <td class="headline"><%= listmps[i].qtd_linear%></td>
+                    <td class="headline"><%= listmps[i].obs_op%></td>
+                    <td class="headline"><%= listmps[i].disponivel%></td>
+                    <td class="btnEdit"><a href="/user/edit_op/<%= listmps[i].projectId%>">Editar</a></td>
+                    <td class="btnExcluir">
+                    <a onclick=" return window.confirm('Confirme a exclusão')" href="/user/delete_op/<%= listmps[i].projectId%>">Excluir</a></td>
 
-                            <% for (let i=0; i < listmps.length; i++)
-                            {%>                                   
-                                <div class="header-op">
-                   
-                                    <tr>
-                                    <div class="line-op">
-                                        <td class="headline">
-                                            <%= listmps[i].num_op%>
-                                        </td>
-                                        <td class="headline">
-                                            <%= listmps[i].cliente%>
-                                        </td>
-                                        <td class="headline">
-                                            <%= listmps[i].dt_ped_op%>
-                                        </td>
-                                        <td class="headline">
-                                            <%= listmps[i].prev_faturamento%>
-                                        </td>
-                                        <td class="headline">
-                                            <%= listmps[i].qtd_linear%>
-                                        </td>
-                                        <td class="headline">
-                                            <%= listmps[i].obs_op%>
-                                        </td>
-                                        <td class="headline">
-                                            <%= listmps[i].disponivel%>
-                                        </td>
-                                        <td class="btnEdit"><a href="/user/edit_op/<%= listmps[i].projectId%>">Editar</a></td>
-
-                                        <td class="btnExcluir">
-                                            <a onclick=" return window.confirm('Confirme a exclusão')" href="/user/delete_op/<%= listmps[i].projectId%>">
-                                                Excluir</a></td>
-
-                                                                                        
-                                    </div>
-                                    </tr>
-                            </form>
-                            </form>
-                        </div>
+                                                                        
+                </div>
+    </tr>
+        </form>
+        </form>
+        </div>
                     <%}%>
-                    <%}%>
-                </table>
+        </table>
 
         </tbody>
         </thead>
