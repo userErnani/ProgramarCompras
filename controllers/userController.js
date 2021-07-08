@@ -205,18 +205,22 @@ const userController = {
     listPedidos: async function (req, res) {
         try {
 
-            const project = await Project.find().populate('tasks')                     
+            const list_mps = await Project.find().populate('tasks')                     
 
-           // res.render('../templates/list_pedidos', { listmps: project })
-            console.log({project});
+            const teste = list_mps.flatMap(teste => teste.tasks)
+            const user = list_mps.concat(teste)
+            // return res.json(user)
+  
+           res.render('../templates/list_pedidos', { listmps: user })
+            // console.log({project});
 
-            return res.send({project})
+        //    return res.send({user})
 
         } catch (error) {
             res.status(400).send({ error: 'erro ao carregar projeto.' })
         }
     },
-}
+} 
 
 module.exports = userController
 
